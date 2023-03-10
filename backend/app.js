@@ -21,7 +21,7 @@ mongoose.connect(process.env.DATABASE, {
 
 
 //port
-const port = process.env.PORT || 9000
+const port = process.env.PORT || 8000
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
