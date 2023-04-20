@@ -1,7 +1,7 @@
 const donator = [
     {
       _id: "1",
-      title: "Day 1 of college",
+      title: "Day 1",
       content:
         "I made a few new friends and introduced myself to a lot of new teachers.",
       category: "College",
