@@ -1,22 +1,26 @@
-
 import './App.css';
-import Footer from './components/Footer/Footer';
-import Header from './components/Header/Header';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import NotFound from './pages/NotFound';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { theme } from './theme';
 
-// function App() {
-//   return (
-//     <div className="App"> hellow world
-      
-//     </div>
-//   );
-// }
 
-const App = () =>(
-  <>
-  <Header/>
-  <main style={{minHeight:"93vh"}}></main>
-  <Footer/>
-  </>
-)
+const App = () => {
 
-export default App;
+    return (
+        <>
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <BrowserRouter>
+                    <Routes>
+                        <Route path='/' element={<Home />} />
+                        <Route path='*' element={<NotFound />} />
+                    </Routes>
+                </BrowserRouter>
+            </ThemeProvider>
+        </>
+    )
+}
+
+export default App
