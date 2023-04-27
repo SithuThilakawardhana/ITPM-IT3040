@@ -1,24 +1,26 @@
-
 import './App.css';
-// import Footer from './components/Footer/Footer';
-// import Header from './components/Header/Header';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import NotFound from './pages/NotFound';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { theme } from './theme';
+
 
 const App = () => {
-  return (
-    <>
-    <h1>DoNation portal</h1>
-     </>
-  )
+
+    return (
+        <>
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <BrowserRouter>
+                    <Routes>
+                        <Route path='/' element={<Home />} />
+                        <Route path='*' element={<NotFound />} />
+                    </Routes>
+                </BrowserRouter>
+            </ThemeProvider>
+        </>
+    )
 }
 
-
-// const App = () =>(
-//   <>
-//   <Header/>
-//   <main style={{minHeight:"93vh"}}></main>
-//   <Footer/>
-//   </>
-// )
-
-
-export default App;
+export default App
