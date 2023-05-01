@@ -12,6 +12,8 @@ var cors = require('cors');
 // import routes
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
+const donateTypeRoute = require('./routes/donateTypeRoutes');
+const donateRoute = require('./routes/donateRoutes');
 
 const cookieParser = require("cookie-parser");
 const errorHandler = require("./middleware/error");
@@ -38,8 +40,11 @@ app.use(cors());
 
 
 //ROUTES MIDDLEWARE
+
 app.use('/api', authRoutes);
 app.use('/api', userRoutes);
+app.use('/api', donateTypeRoute);
+app.use('/api', donateRoute);
 
 // error middleware
 app.use(errorHandler);
