@@ -44,8 +44,15 @@ function Navbar() {
         <AppBar position="static">
             <Container >
                 {/* principal Menu */}
+                {/* <Button
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'white', display: 'block' }}>
+                            <Link to="/" style={{ color: 'white', textDecoration: "white" }}>
+                                I am a Donator
+                            </Link>
+                        </Button> */}
                 <Toolbar disableGutters>
-                    <WorkIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                    {/* <WorkIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
                     <Typography
                         variant="h6"
                         noWrap
@@ -121,12 +128,51 @@ function Navbar() {
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {/* menu desktop */}
+                        <Button
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'white', display: 'block' }}>
+                            <Link to="/" style={{ color: 'white', textDecoration: "none" }}>
+                               I need Donations
+                            </Link>
+                        </Button>
 
                         <Button
                             onClick={handleCloseNavMenu}
                             sx={{ my: 2, color: 'white', display: 'block' }}>
                             <Link to="/" style={{ color: 'white', textDecoration: "none" }}>
-                                Home
+                                I am a Donator
+                            </Link>
+                        </Button>
+
+                        <Button
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'white', display: 'block' }}>
+                            <Link to="/" style={{ color: 'white', textDecoration: "none" }}>
+                                Jobs
+                            </Link>
+                        </Button>
+
+                        <Button
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'white', display: 'block' }}>
+                            <Link to="/" style={{ color: 'white', textDecoration: "none" }}>
+                                Courses
+                            </Link>
+                        </Button>
+
+                        <Button
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'white', display: 'block' }}>
+                            <Link to="/" style={{ color: 'white', textDecoration: "none" }}>
+                                About Us
+                            </Link>
+                        </Button>
+
+                        <Button
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'white', display: 'block' }}>
+                            <Link to="/" style={{ color: 'white', textDecoration: "none" }}>
+                                Contact Us
                             </Link>
                         </Button>
 
@@ -166,7 +212,6 @@ function Navbar() {
                             <MenuItem >
                                 <Typography style={{ textDecoration: "none", color: palette.primary.main }} textAlign="center">Log Out</Typography>
                             </MenuItem>
-
                         </Menu>
                     </Box>
                 </Toolbar>
