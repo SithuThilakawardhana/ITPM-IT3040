@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { allUsers, singleUser, editUser, deleteUser } = require('../controllers/userController');
+const { allUsers, singleUser, editUser, deleteUser,createUserdonateHistory } = require('../controllers/userController');
 const { isAuthenticated, isAdmin } = require('../middleware/auth');
 
 
@@ -24,7 +24,8 @@ router.delete('/admin/user/delete/:id', isAuthenticated, isAdmin, deleteUser);
 // /api/user/delete/id (normal user delete)
 router.delete('/user/delete/:id', isAuthenticated, deleteUser);
 
-
+// /api/user/donatehistory
+router.post('/user/donatehistory', isAuthenticated, createUserdonateHistory);
 
 
 module.exports = router;

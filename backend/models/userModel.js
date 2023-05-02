@@ -2,6 +2,55 @@
 const mongoose = require('mongoose');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { ObjectId } = mongoose.Schema;
+
+const donateHistorySchema = new mongoose.Schema({
+
+    title: {
+        type: String,
+        trim: true,
+        maxlength: 70,
+    },
+
+    Description: {
+        type: String,
+        trim: true,
+       
+    },
+
+    Salary: {
+        type: String,
+        trim: true,
+       
+    },
+
+    Location: {
+        type: String,
+       
+    },
+
+    donateDate: {
+        type: String,
+       
+    },
+
+    applicationStatus: {
+        type: String,
+        enum: ['pending', 'accepted', 'rejected'],
+        default: 'pending'
+       
+    },
+
+
+    user: {
+        type: ObjectId,
+        ref: "User",
+        required : true
+    },
+   
+
+}, { timestamps: true })
+
 
 const userSchema = new mongoose.Schema({
 
@@ -33,6 +82,8 @@ const userSchema = new mongoose.Schema({
         required: [true, 'password is required'],
         minlength: [6, 'password must have at least (6) caracters'],
     },
+
+    donateHistory: [donateHistorySchema],
 
     role: {
         type: Number,
