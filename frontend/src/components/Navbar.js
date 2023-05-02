@@ -12,13 +12,20 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import WorkIcon from '@mui/icons-material/Work';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTheme } from '@emotion/react';
+import { useDispatch, useSelector } from 'react-redux';
+import { userLogoutAction } from '../redux/actions/userAction';
 
 const pages = ['Home', 'Log In'];
 
 
-function Navbar() {
+const Navbar = () => {
+    //show / hide button
+    const { userInfo } = useSelector(state => state.signIn);
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { palette } = useTheme();
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -38,21 +45,23 @@ function Navbar() {
         setAnchorElUser(null);
     };
 
+    // log out user
+    const logOutUser = () => {
+        dispatch(userLogoutAction());
+        window.location.reload(true);
+        setTimeout(() => {
+            navigate('/');
+        }, 500)
+    }
+
 
 
     return (
         <AppBar position="static">
             <Container >
                 {/* principal Menu */}
-                {/* <Button
-                            onClick={handleCloseNavMenu}
-                            sx={{ my: 2, color: 'white', display: 'block' }}>
-                            <Link to="/" style={{ color: 'white', textDecoration: "white" }}>
-                                I am a Donator
-                            </Link>
-                        </Button> */}
                 <Toolbar disableGutters>
-                    {/* <WorkIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+                    <WorkIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                     <Typography
                         variant="h6"
                         noWrap
@@ -68,7 +77,7 @@ function Navbar() {
                             textDecoration: 'none',
                         }}
                     >
-                        DoNation
+                        JOB PORTAL
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -124,55 +133,16 @@ function Navbar() {
                             textDecoration: 'none',
                         }}
                     >
-                        DoNation
+                        JOB PORTAL
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {/* menu desktop */}
-                        <Button
-                            onClick={handleCloseNavMenu}
-                            sx={{ my: 2, color: 'white', display: 'block' }}>
-                            <Link to="/" style={{ color: 'white', textDecoration: "none" }}>
-                               I need Donations
-                            </Link>
-                        </Button>
 
                         <Button
                             onClick={handleCloseNavMenu}
                             sx={{ my: 2, color: 'white', display: 'block' }}>
                             <Link to="/" style={{ color: 'white', textDecoration: "none" }}>
-                                I am a Donator
-                            </Link>
-                        </Button>
-
-                        <Button
-                            onClick={handleCloseNavMenu}
-                            sx={{ my: 2, color: 'white', display: 'block' }}>
-                            <Link to="/" style={{ color: 'white', textDecoration: "none" }}>
-                                Jobs
-                            </Link>
-                        </Button>
-
-                        <Button
-                            onClick={handleCloseNavMenu}
-                            sx={{ my: 2, color: 'white', display: 'block' }}>
-                            <Link to="/" style={{ color: 'white', textDecoration: "none" }}>
-                                Courses
-                            </Link>
-                        </Button>
-
-                        <Button
-                            onClick={handleCloseNavMenu}
-                            sx={{ my: 2, color: 'white', display: 'block' }}>
-                            <Link to="/" style={{ color: 'white', textDecoration: "none" }}>
-                                About Us
-                            </Link>
-                        </Button>
-
-                        <Button
-                            onClick={handleCloseNavMenu}
-                            sx={{ my: 2, color: 'white', display: 'block' }}>
-                            <Link to="/" style={{ color: 'white', textDecoration: "none" }}>
-                                Contact Us
+                                Home
                             </Link>
                         </Button>
 
@@ -205,13 +175,19 @@ function Navbar() {
                                 <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.primary.main }} to="/admin/dashboard">Dashboard</Link></Typography>
                             </MenuItem>
 
-                            <MenuItem onClick={handleCloseUserMenu}>
-                                <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.primary.main }} to="/login">Log In</Link></Typography>
-                            </MenuItem>
+                            {
+                                !userInfo ?
 
-                            <MenuItem >
-                                <Typography style={{ textDecoration: "none", color: palette.primary.main }} textAlign="center">Log Out</Typography>
-                            </MenuItem>
+                                    <MenuItem onClick={handleCloseUserMenu}>
+                                        <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.primary.main }} to="/login">Log In</Link></Typography>
+                                    </MenuItem> :
+
+                                    <MenuItem onClick={logOutUser}>
+                                        <Typography style={{ textDecoration: "none", color: palette.primary.main }} textAlign="center">Log Out</Typography>
+                                    </MenuItem>
+                            }
+
+
                         </Menu>
                     </Box>
                 </Toolbar>

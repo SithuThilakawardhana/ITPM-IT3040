@@ -2,7 +2,7 @@ const donate = require('../models/donateModel');
 const donateType = require('../models/donateTypeModel');
 const ErrorResponse = require('../utils/errorResponse');
 
-//create job
+//create donate
 exports.createdonate = async (req, res, next) => {
     try {
         const donate = await donate.create({
@@ -40,7 +40,7 @@ exports.singledonate = async (req, res, next) => {
 //update donate by id.
 exports.updatedonate = async (req, res, next) => {
     try {
-        const donate = await donate.findByIdAndUpdate(req.params.job_id, req.body, { new: true }).populate('donateType', 'donateTypeName').populate('user', 'firstName lastName');
+        const donate = await donate.findByIdAndUpdate(req.params.donate_id, req.body, { new: true }).populate('donateType', 'donateTypeName').populate('user', 'firstName lastName');
         res.status(200).json({
             success: true,
             donate
@@ -74,19 +74,32 @@ exports.showdonate = async (req, res, next) => {
     let categ = cat !== '' ? cat : ids;
 
 
+    //donate by location
+    let locations = [];
+    const jobByLocation = await donate.find({}, { location: 1 });
+    donateByLocation.forEach(val => {
+        locations.push(val.location);
+    });
+    let setUniqueLocation = [...new Set(locations)];
+    let location = req.query.location;
+    let locationFilter = location !== '' ? location : setUniqueLocation;
+
+
     //enable pagination
     const pageSize = 5;
     const page = Number(req.query.pageNumber) || 1;
-    const count = await donate.find({ ...keyword, donateType: categ }).countDocuments();
+    const count = await donate.find({ ...keyword, donateType: categ, location: locationFilter }).countDocuments();
 
     try {
-        const donate = await donate.find({ ...keyword, donateType: categ }).skip(pageSize * (page - 1)).limit(pageSize)
+        const donate = await donate.find({ ...keyword, donateType: categ, location: locationFilter }).sort({ createdAt: -1 }).skip(pageSize * (page - 1)).limit(pageSize)
         res.status(200).json({
             success: true,
             donate,
             page,
             pages: Math.ceil(count / pageSize),
-            count
+            count,
+            setUniqueLocation
+
         })
     } catch (error) {
         next(error);
