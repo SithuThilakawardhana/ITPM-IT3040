@@ -1,4 +1,4 @@
-import { donate_LOAD_FAIL, donate_LOAD_REQUEST, donate_LOAD_RESET, donate_LOAD_SUCCESS } from "../constants/donateConstant"
+import { donate_LOAD_FAIL, donate_LOAD_REQUEST, donate_LOAD_RESET, donate_LOAD_SINGLE_FAIL, donate_LOAD_SINGLE_REQUEST, donate_LOAD_SINGLE_RESET, donate_LOAD_SINGLE_SUCCESS, donate_LOAD_SUCCESS } from "../constants/donateConstant"
 
 
 export const loaddonateReducer = (state = { donate: [] }, action) => {
@@ -25,4 +25,27 @@ export const loaddonateReducer = (state = { donate: [] }, action) => {
         default:
             return state;
     }
+}
+
+// single donate reducer
+export const loaddonateSingleReducer = (state = { donate: {} }, action) => {
+    switch (action.type) {
+        case donate_LOAD_SINGLE_REQUEST:
+            return { loading: true }
+        case donate_LOAD_SINGLE_SUCCESS:
+            return {
+
+                loading: false,
+                success: action.payload.success,
+                singledonate: action.payload.donate,
+
+            }
+        case donate_LOAD_SINGLE_FAIL:
+            return { loading: false, error: action.payload }
+        case donate_LOAD_SINGLE_RESET:
+            return {}
+        default:
+            return state;
+    }
+
 }

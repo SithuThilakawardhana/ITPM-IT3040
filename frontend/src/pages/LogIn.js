@@ -1,15 +1,16 @@
-import { Avatar, Box } from '@mui/material'
-import React, { useEffect } from 'react'
-import Footer from '../components/Footer'
-import Navbar from '../components/Navbar'
-import LockClockOutlined from '@mui/icons-material/LockClockOutlined'
+import { Avatar, Box } from '@mui/material';
+import React, { useEffect } from 'react';
+import Footer from '../components/Footer';
+import Navbar from '../components/Navbar';
+import LockClockOutlined from '@mui/icons-material/LockClockOutlined';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { useDispatch, useSelector } from 'react-redux'
-import { userSignInAction } from '../redux/actions/userAction'
-import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
+import { userSignInAction } from '../redux/actions/userAction';
+import { Link, useNavigate } from 'react-router-dom';
+import Grid from '@mui/material/Grid';
 
 const validationSchema = yup.object({
     email: yup
@@ -27,11 +28,17 @@ const validationSchema = yup.object({
 const LogIn = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { isAuthenticated } = useSelector(state => state.signIn);
+    const { isAuthenticated, userInfo } = useSelector(state => state.signIn);
     useEffect(() => {
+
         if (isAuthenticated) {
-            navigate('/user/dashboard');
+            if (userInfo.role === 1) {
+                navigate('/admin/dashboard');
+            } else {
+                navigate('/user/dashboard');
+            }
         }
+
     }, [isAuthenticated])
 
     const formik = useFormik({
@@ -90,7 +97,27 @@ const LogIn = () => {
                             helperText={formik.touched.password && formik.errors.password}
                         />
 
-                        <Button fullWidth variant="contained" type='submit' >Log In</Button>
+                        <Button fullWidth variant="contained" type='submit' >
+                        <Link to="/admin/dashboard" style={{ color: 'white', textDecoration: "none" }}>
+                        Log In
+                            </Link>
+                            </Button>
+
+                        <Button  style={{ background: 'white' ,marginTop: '10px', border: '1px solid navy blue'  }}
+                            fullWidth variant="contained" type='submit' >
+                            <Link to="/loginbenificiary" style={{ color: ' #1e90ff', textDecoration: "none" }}>
+                                Sign Up
+                            </Link>    
+                        </Button>
+                        <br/>
+                        <Grid container>
+                            <Grid item xs>
+                             <Link href="#" variant="body2">
+                               Forgot password?
+                             </Link>
+                            </Grid>
+            
+                        </Grid>
                     </Box>
                 </Box>
             </Box>

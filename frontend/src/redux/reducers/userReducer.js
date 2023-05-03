@@ -1,4 +1,12 @@
 import {
+    ALL_USER_LOAD_FAIL,
+    ALL_USER_LOAD_REQUEST,
+    ALL_USER_LOAD_RESET,
+    ALL_USER_LOAD_SUCCESS,
+    USER_APPLY_DONATE_FAIL,
+    USER_APPLY_DONATE_REQUEST,
+    USER_APPLY_DONATE_RESET,
+    USER_APPLY_DONATE_SUCCESS,
     USER_LOAD_FAIL,
     USER_LOAD_REQUEST,
     USER_LOAD_RESET,
@@ -67,6 +75,47 @@ export const userReducerLogout = (state = {}, action) => {
         case USER_LOGOUT_FAIL:
             return { loading: false, error: action.payload }
         case USER_LOGOUT_RESET:
+            return {}
+        default:
+            return state;
+    }
+
+}
+
+// apply for a donate reducer
+export const userApplydonateReducer = (state = {}, action) => {
+    switch (action.type) {
+        case USER_APPLY_DONATE_REQUEST:
+            return { loading: true }
+        case USER_APPLY_DONATE_SUCCESS:
+            return {
+                loading: false,
+                userdonate: action.payload,
+            }
+        case USER_APPLY_DONATE_FAIL:
+            return { loading: false, error: action.payload }
+        case USER_APPLY_DONATE_RESET:
+            return {}
+        default:
+            return state;
+    }
+
+}
+
+
+//all users reducer
+export const allUserReducer = (state = { users: [] }, action) => {
+    switch (action.type) {
+        case ALL_USER_LOAD_REQUEST:
+            return { loading: true, users: [] }
+        case ALL_USER_LOAD_SUCCESS:
+            return {
+                loading: false,
+                users: action.payload.users,
+            }
+        case ALL_USER_LOAD_FAIL:
+            return { loading: false, users: [], error: action.payload }
+        case ALL_USER_LOAD_RESET:
             return {}
         default:
             return state;

@@ -61,7 +61,7 @@ const Navbar = () => {
             <Container >
                 {/* principal Menu */}
                 <Toolbar disableGutters>
-                    <WorkIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                    {/* <WorkIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
                     <Typography
                         variant="h6"
                         noWrap
@@ -77,7 +77,7 @@ const Navbar = () => {
                             textDecoration: 'none',
                         }}
                     >
-                        JOB PORTAL
+                        DoNation
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -133,7 +133,7 @@ const Navbar = () => {
                             textDecoration: 'none',
                         }}
                     >
-                        JOB PORTAL
+                        DoNation
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {/* menu desktop */}
@@ -145,6 +145,60 @@ const Navbar = () => {
                                 Home
                             </Link>
                         </Button>
+
+                        <Button 
+                            style={{ background: 'white',border: '1px solid #1e90ff'  }}
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: '#1e90ff', display: 'block' }}>
+                            <Link to="/logindonator" style={{ color: '#1e90ff', textDecoration: "none" }}>
+                                I am a Donator
+                            </Link>
+                        </Button>
+
+                        <Button
+                            
+                            style={{ background: 'white' ,marginLeft: '10px', border: '1px solid #1e90ff' ,
+                            '&:active': { background: 'red' } 
+                            }}
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: ' #1e90ff', display: 'block' }}>
+                            <Link to="/loginbenificiary" style={{ color: ' #1e90ff', textDecoration: "none" }}>
+                            I Need Donations  
+                            </Link>
+                        </Button>
+
+                        <Button
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'white', display: 'block' }}>
+                            <Link to="/" style={{ color: 'white', textDecoration: "none" }}>
+                                Jobs
+                            </Link>
+                        </Button>
+
+                        <Button
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'white', display: 'block' }}>
+                            <Link to="/" style={{ color: 'white', textDecoration: "none" }}>
+                                Courses
+                            </Link>
+                        </Button>
+
+                        <Button
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'white', display: 'block' }}>
+                            <Link to="/aboutus" style={{ color: 'white', textDecoration: "none" }}>
+                                About Us
+                            </Link>
+                        </Button>
+
+                        <Button
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'white', display: 'block' }}>
+                            <Link to="/" style={{ color: 'white', textDecoration: "none" }}>
+                                Contact Us
+                            </Link>
+                        </Button>
+
 
                     </Box>
 
@@ -172,7 +226,11 @@ const Navbar = () => {
                         >
 
                             <MenuItem onClick={handleCloseUserMenu}>
-                                <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.primary.main }} to="/admin/dashboard">Dashboard</Link></Typography>
+                                <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.primary.main }} to="/admin/dashboard">Admin Dashboard</Link></Typography>
+                            </MenuItem>
+
+                            <MenuItem onClick={handleCloseUserMenu}>
+                                <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.primary.main }} to="/user/dashboard">User Dashboard</Link></Typography>
                             </MenuItem>
 
                             {
@@ -181,6 +239,8 @@ const Navbar = () => {
                                     <MenuItem onClick={handleCloseUserMenu}>
                                         <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.primary.main }} to="/login">Log In</Link></Typography>
                                     </MenuItem> :
+
+                                    
 
                                     <MenuItem onClick={logOutUser}>
                                         <Typography style={{ textDecoration: "none", color: palette.primary.main }} textAlign="center">Log Out</Typography>

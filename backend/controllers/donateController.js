@@ -1,8 +1,8 @@
 const donate = require('../models/donateModel');
 const donateType = require('../models/donateTypeModel');
-const ErrorResponse = require('../utils/errorResponse');
+const errorResponse = require('../utils/errorResponse');
 
-//create donate
+//create job
 exports.createdonate = async (req, res, next) => {
     try {
         const donate = await donate.create({
@@ -23,7 +23,7 @@ exports.createdonate = async (req, res, next) => {
 }
 
 
-//single donate
+//single donation
 exports.singledonate = async (req, res, next) => {
     try {
         const donate = await donate.findById(req.params.id);
@@ -37,7 +37,7 @@ exports.singledonate = async (req, res, next) => {
 }
 
 
-//update donate by id.
+//update donation by id.
 exports.updatedonate = async (req, res, next) => {
     try {
         const donate = await donate.findByIdAndUpdate(req.params.donate_id, req.body, { new: true }).populate('donateType', 'donateTypeName').populate('user', 'firstName lastName');
@@ -51,7 +51,7 @@ exports.updatedonate = async (req, res, next) => {
 }
 
 
-//update donate by id.
+//update donations by id.
 exports.showdonate = async (req, res, next) => {
 
     //enable search 
@@ -63,7 +63,7 @@ exports.showdonate = async (req, res, next) => {
     } : {}
 
 
-    // filter donate by category ids
+    // filter donations by category ids
     let ids = [];
     const donateTypeCategory = await donateType.find({}, { _id: 1 });
     donateTypeCategory.forEach(cat => {
@@ -74,9 +74,9 @@ exports.showdonate = async (req, res, next) => {
     let categ = cat !== '' ? cat : ids;
 
 
-    //donate by location
+    //donataionns by location
     let locations = [];
-    const jobByLocation = await donate.find({}, { location: 1 });
+    const donateByLocation = await donate.find({}, { location: 1 });
     donateByLocation.forEach(val => {
         locations.push(val.location);
     });
@@ -91,7 +91,7 @@ exports.showdonate = async (req, res, next) => {
     const count = await donate.find({ ...keyword, donateType: categ, location: locationFilter }).countDocuments();
 
     try {
-        const donate = await donate.find({ ...keyword, donateType: categ, location: locationFilter }).sort({ createdAt: -1 }).skip(pageSize * (page - 1)).limit(pageSize)
+        const donate = await donate.find({ ...keyword, donateType: categ, location: locationFilter }).sort({ createdAt: -1 }).populate('donateType', 'donateTypeName').populate('user', 'firstName').skip(pageSize * (page - 1)).limit(pageSize)
         res.status(200).json({
             success: true,
             donate,
