@@ -1,9 +1,9 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from '@redux-devtools/extension';
-import { loaddonateReducer } from './reducers/donateReducer';
+import { loaddonateReducer, loaddonateSingleReducer } from './reducers/donateReducer';
 import { loaddonateTypeReducer } from './reducers/donateTypeReducer';
-import { userReducerLogout, userReducerProfile, userReducerSignIn } from './reducers/userReducer';
+import { allUserReducer, userApplydonateReducer, userReducerLogout, userReducerProfile, userReducerSignIn } from './reducers/userReducer';
 
 //combine reducers
 const reducer = combineReducers({
@@ -11,7 +11,10 @@ const reducer = combineReducers({
     donateTypeAll: loaddonateTypeReducer,
     signIn: userReducerSignIn,
     logOut: userReducerLogout,
-    userProfile: userReducerProfile
+    userProfile: userReducerProfile,
+    singledonate: loaddonateSingleReducer,
+    userdonateApplication: userApplydonateReducer,
+    allUsers: allUserReducer
 });
 
 

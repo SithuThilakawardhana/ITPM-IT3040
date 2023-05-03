@@ -46,7 +46,7 @@ const SearchInputEl = () => {
                     id="search"
                     name="search"
                     label="search"
-                    placeholder='ex: developer, front end'
+                    placeholder='Search here'
                     value={values.search}
                     onChange={handleChange}
                     error={touched.search && Boolean(errors.search)}

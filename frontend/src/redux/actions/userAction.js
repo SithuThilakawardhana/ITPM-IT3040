@@ -1,6 +1,12 @@
 import axios from 'axios';
 import { toast } from "react-toastify";
 import {
+    ALL_USER_LOAD_FAIL,
+    ALL_USER_LOAD_REQUEST,
+    ALL_USER_LOAD_SUCCESS,
+    USER_APPLY_DONATE_FAIL,
+    USER_APPLY_DONATE_REQUEST,
+    USER_APPLY_DONATE_SUCCESS,
     USER_LOAD_FAIL,
     USER_LOAD_REQUEST,
     USER_LOAD_SUCCESS,
@@ -69,5 +75,44 @@ export const userProfileAction = () => async (dispatch) => {
             type: USER_LOAD_FAIL,
             payload: error.response.data.error
         });
+    }
+}
+
+
+//all user action
+export const allUserAction = () => async (dispatch) => {
+    dispatch({ type: ALL_USER_LOAD_REQUEST });
+    try {
+        const { data } = await axios.get("/api/allusers");
+        dispatch({
+            type: ALL_USER_LOAD_SUCCESS,
+            payload: data
+        });
+
+    } catch (error) {
+        dispatch({
+            type: ALL_USER_LOAD_FAIL,
+            payload: error.response.data.error
+        });
+    }
+}
+
+//user donattion apply action
+export const userApplydonateAction = (donate) => async (dispatch) => {
+    dispatch({ type: USER_APPLY_DONATE_REQUEST });
+    try {
+        const { data } = await axios.post("/api/user/donatehistory", donate);
+
+        dispatch({
+            type: USER_APPLY_DONATE_SUCCESS,
+            payload: data
+        });
+        toast.success("Apply Successfully for this Donatin!");
+    } catch (error) {
+        dispatch({
+            type: USER_APPLY_DONATE_FAIL,
+            payload: error.response.data.error
+        });
+        toast.error(error.response.data.error);
     }
 }
