@@ -98,14 +98,14 @@ const LogIn = () => {
                         />
 
                         <Button fullWidth variant="contained" type='submit' >
-                        <Link to="/admin/dashboard" style={{ color: 'white', textDecoration: "none" }}>
+                        <Link to='/dashboard' style={{ color: 'white', textDecoration: "none" }}>
                         Log In
                             </Link>
-                            </Button>
+                        </Button>
 
                         <Button  style={{ background: 'white' ,marginTop: '10px', border: '1px solid navy blue'  }}
                             fullWidth variant="contained" type='submit' >
-                            <Link to="/loginbenificiary" style={{ color: ' #1e90ff', textDecoration: "none" }}>
+                            <Link to='/signup' style={{ color: ' #1e90ff', textDecoration: "none" }}>
                                 Sign Up
                             </Link>    
                         </Button>

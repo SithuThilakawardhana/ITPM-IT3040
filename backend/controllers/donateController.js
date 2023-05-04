@@ -2,7 +2,7 @@ const donate = require('../models/donateModel');
 const donateType = require('../models/donateTypeModel');
 const errorResponse = require('../utils/errorResponse');
 
-//create job
+//create donation
 exports.createdonate = async (req, res, next) => {
     try {
         const donate = await donate.create({

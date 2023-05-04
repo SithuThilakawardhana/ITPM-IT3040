@@ -20,11 +20,12 @@ import DashUsers from './pages/admin/DashUsers';
 import Dashdonate from './pages/admin/Dashdonate';
 import LogInDonator from './pages/LogInDonator';
 import LogInBenificiary from './pages/LogInBenificiary';
-import Donator from './pages/LogInDonator';
-import Benificiary from './pages/LogInBenificiary';
+import Donator from './pages/Donator';
+import Benificiary from './pages/Benificiary';
 import SignUp from './pages/SignUp';
 import SignUpD from './pages/SignUpD';
 import AboutUs from './pages/AboutUs';
+import Dashboard from './components/Dashboard';
 
 //HOC
 const UserDashboardHOC = Layout(UserDashboard);
@@ -56,6 +57,7 @@ const App = () => {
                             <Route path='/loginbenificiary' element={<LogInBenificiary />} />
                             <Route path='/benificiary' element={<Benificiary />} />
                             <Route path='/donator' element={<Donator />} />
+                            <Route path='/dashboard' element={<Dashboard />} />
                             <Route path='/donate/:id' element={<Singledonate />} />
                             <Route path='/admin/dashboard' element={<AdminRoute><AdminDashboardHOC /></AdminRoute>} />
                             <Route path='/admin/users' element={<AdminRoute><DashUsersHOC /></AdminRoute>} />

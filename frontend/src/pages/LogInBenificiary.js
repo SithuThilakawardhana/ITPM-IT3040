@@ -1,116 +1,129 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
+import { Avatar, Box } from '@mui/material';
+import React, { useEffect } from 'react';
+import Footer from '../components/Footer';
+import Navbar from '../components/Navbar';
+import LockClockOutlined from '@mui/icons-material/LockClockOutlined';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
+import Button from '@mui/material/Button';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
+import { userSignInAction } from '../redux/actions/userAction';
+import { Link, useNavigate } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
+const validationSchema = yup.object({
+    email: yup
+        .string('Enter your email')
+        .email('Enter a valid email')
+        .required('Email is required'),
+    password: yup
+        .string('Enter your password')
+        .min(8, 'Password should be of minimum 8 characters length')
+        .required('Password is required'),
+});
+
+
+
+const LogInBenificiary = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { isAuthenticated, userInfo } = useSelector(state => state.signIn);
+    useEffect(() => {
+
+        if (isAuthenticated) {
+            if (userInfo.role === 1) {
+                navigate('/admin/dashboard');
+            } else {
+                navigate('/user/dashboard');
+            }
+        }
+
+    }, [isAuthenticated])
+
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: ''
+        },
+        validationSchema: validationSchema,
+        onSubmit: (values, actions) => {
+            dispatch(userSignInAction(values));
+            actions.resetForm();
+        }
+
+    })
+
+    return (
+        <>
+            <Navbar />
+            <Box sx={{ height: '81vh', display: "flex", alignItems: "center", justifyContent: "center" }}>
+
+
+                <Box onSubmit={formik.handleSubmit} component="form" className='form_style border-style' >
+                    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}>
+                        <Avatar sx={{ m: 1, bgcolor: "primary.main", mb: 3 }}>
+                            <LockClockOutlined />
+                        </Avatar>
+                        <TextField sx={{ mb: 3 }}
+                            fullWidth
+                            id="email"
+                            label="E-mail"
+                            name='email'
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            placeholder="E-mail"
+                            value={formik.values.email}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            error={formik.touched.email && Boolean(formik.errors.email)}
+                            helperText={formik.touched.email && formik.errors.email}
+                        />
+                        <TextField sx={{ mb: 3 }}
+                            fullWidth
+                            id="password"
+                            name="password"
+                            label="Password"
+                            type="password"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            placeholder="Password"
+                            value={formik.values.password}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            error={formik.touched.password && Boolean(formik.errors.password)}
+                            helperText={formik.touched.password && formik.errors.password}
+                        />
+
+                        <Button fullWidth variant="contained" type='submit' >
+                        <Link to='/benificiary' style={{ color: 'white', textDecoration: "none" }}>
+                        Log In
+                            </Link>
+                        </Button>
+
+                        <Button  style={{ background: 'white' ,marginTop: '10px', border: '1px solid navy blue'  }}
+                            fullWidth variant="contained" type='submit' >
+                            <Link to='/signup' style={{ color: ' #1e90ff', textDecoration: "none" }}>
+                                Sign Up
+                            </Link>    
+                        </Button>
+                        <br/>
+                        <Grid container>
+                            <Grid item xs>
+                             <Link href="#" variant="body2">
+                               Forgot password?
+                             </Link>
+                            </Grid>
+            
+                        </Grid>
+                    </Box>
+                </Box>
+            </Box>
+            <Footer />
+        </>
+    )
 }
 
-const theme = createTheme();
-
-export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
-
-  return (
-    <>
-    <Navbar />
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In 
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
-        </Box>
-        <br />
-      </Container>
-    </ThemeProvider>
-     <Footer />
-     </>
-  );
-}
+export default LogInBenificiary
