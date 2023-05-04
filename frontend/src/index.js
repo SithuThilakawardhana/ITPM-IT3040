@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+// import Dashboard from './Dashboard';
+
 
 
 
@@ -13,6 +15,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <App />
+      {/* <Dashboard /> */}
     </Provider>
   </React.StrictMode>
 );

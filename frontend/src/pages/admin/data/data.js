@@ -1,5 +1,5 @@
 export const data = [
-    ["Year", "Jobs", "Pending", "Approved"],
+    ["Year", "donate", "Pending", "Approved"],
     ["2014", 1000, 400, 200],
     ["2015", 1170, 460, 250],
     ["2016", 660, 1120, 300],
