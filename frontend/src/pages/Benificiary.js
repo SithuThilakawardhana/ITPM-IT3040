@@ -78,7 +78,7 @@ const Benificiary = () => (
 
 <ThemeProvider theme={theme}></ThemeProvider>
       <Container component="main" maxWidth="xs"></Container>
-      <span style={{fontWeight: 'bold', display: 'flex' , justify-content:'' center', fontSize: '30px'}}>Can I get a Support?</span>
+      <span style={{fontWeight: 'bold', display: 'flex' , content:' center', fontSize: '30px'}}>Can I get a Support?</span>
       <div style="display: flex; justify-content: center;">
   <span style={{fontWeight: 'bold', fontSize: '30px'}}>Can I get a Support?</span>
 </div>
