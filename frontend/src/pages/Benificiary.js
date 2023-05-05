@@ -1,6 +1,7 @@
 import { InboxOutlined, UploadOutlined } from '@ant-design/icons';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useState } from 'react';
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import {
@@ -8,15 +9,10 @@ import {
   Checkbox,
   Col,
   Form,
-  InputNumber,
+  Input,
   Radio,
-  Rate,
-  Row,
   Select,
-  Slider,
   Space,
-  Switch,
-  Upload,
 } from 'antd';
 
 
@@ -29,249 +25,129 @@ const formItemLayout = {
     span: 10,
   },
 };
-
-const normFile = (e) => {
-  console.log('Upload event:', e);
-  if (Array.isArray(e)) {
-    return e;
-  }
-  return e?.fileList;
-};
-
 const onFinish = (values) => {
   console.log('Received values of form: ', values);
 };
 
 const theme = createTheme();
-const Benificiary = () => (
+const Benificiary = () => {
+  const [showPaymentForm, setShowPaymentForm] = useState(false);
 
-  <div style={{
-    backgroundImage: "url('poverty.jpg')",
-    backgroundSize: 'cover',
-    opacity: 0.8, // set opacity here
-    minHeight: '100vh', // to cover the full screen
-  }}>
-  <Form
-    name="validate_other"
-    {...formItemLayout}
-    onFinish={onFinish}
-    initialValues={{
-      'input-number': 3,
-      'checkbox-group': ['A', 'B'],
-      rate: 3.5,
-    }}
-    style={{
-      maxWidth: 2000,
-    }}
-  >
+  const handleRequestorChange = (e) => {
+    if (e.target.value === 'c') {
+      setShowPaymentForm(true);
+    } else {
+      setShowPaymentForm(false);
+    }
 
-<Navbar />
+  };
 
-<Form
-      {...formItemLayout}
-      style={{
-        maxWidth: 2000,
-        backgroundColor: 'transparent', // make the form background transparent
-      }}
-    >
-    </Form>
-
-<ThemeProvider theme={theme}></ThemeProvider>
-      <Container component="main" maxWidth="xs"></Container>
-      <span style={{fontWeight: 'bold', display: 'flex' , content:' center', fontSize: '30px'}}>Can I get a Support?</span>
-      <div style="display: flex; justify-content: center;">
-  <span style={{fontWeight: 'bold', fontSize: '30px'}}>Can I get a Support?</span>
-</div>
-
-  
-  
-    <Form.Item
-      name="select"
-      label="Select"
-      hasFeedback
-      rules={[
-        {
-          required: true,
-          message: 'Please select your country!',
-        },
-      ]}
-    >
-      <Select placeholder="Please select a country">
-        <Option value="china">China</Option>
-        <Option value="usa">U.S.A</Option>
-      </Select>
-    </Form.Item>
-
-    <Form.Item
-      name="select-multiple"
-      label="Select[multiple]"
-      rules={[
-        {
-          required: true,
-          message: 'Please select your favourite colors!',
-          type: 'array',
-        },
-      ]}
-    >
-      <Select mode="multiple" placeholder="Please select favourite colors">
-        <Option value="red">Red</Option>
-        <Option value="green">Green</Option>
-        <Option value="blue">Blue</Option>
-      </Select>
-    </Form.Item>
-
-    <Form.Item label="InputNumber">
-      <Form.Item name="input-number" noStyle>
-        <InputNumber min={1} max={10} />
-      </Form.Item>
-      <span
-        className="ant-form-text"
+  return (
+    <div style={{
+      backgroundImage: "url('poverty.jpg')",
+      backgroundSize: 'cover',
+      opacity: 0.8, // set opacity here
+      minHeight: '100vh', // to cover the full screen
+    }}>
+      <Form
+        name="validate_other"
+        {...formItemLayout}
+        onFinish={onFinish}
+        initialValues={{
+          'input-number': 3,
+          'checkbox-group': ['A', 'B'],
+          rate: 3.5,
+        }}
         style={{
-          marginLeft: 8,
+          maxWidth: 2000,
         }}
       >
-        machines
-      </span>
-    </Form.Item>
 
-    <Form.Item name="switch" label="Switch" valuePropName="checked">
-      <Switch />
-    </Form.Item>
+        <Navbar />
 
-    <Form.Item name="slider" label="Slider">
-      <Slider
-        marks={{
-          0: 'A',
-          20: 'B',
-          40: 'C',
-          60: 'D',
-          80: 'E',
-          100: 'F',
-        }}
-      />
-    </Form.Item>
+        <Form
+          {...formItemLayout}
+          style={{
+            maxWidth: 2000,
+            backgroundColor: 'transparent', // make the form background transparent
+          }}
+        >
+        </Form>
 
-    <Form.Item name="radio-group" label="Radio.Group">
-      <Radio.Group>
-        <Radio value="a">item 1</Radio>
-        <Radio value="b">item 2</Radio>
-        <Radio value="c">item 3</Radio>
-      </Radio.Group>
-    </Form.Item>
+        <ThemeProvider theme={theme}></ThemeProvider>
+        <Container component="main" maxWidth="xs"></Container>
+        <span style={{ fontWeight: 'bold', display: 'flex', justifyContent: ' center', fontSize: '30px' }}>Can I get a Support?</span>
+        <br />
 
+        <Form.Item
+          name="FullName"
+          label="Full Name"
+          hasFeedback
+          rules={[{ required: true, message: 'Please enter your Full name', }]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item
+          name="Address"
+          label="Address"
+          hasFeedback
+          rules={[{ required: true, message: 'Please enter your Address', }]}
+        >
+          <Input />
+        </Form.Item>
+        <div>
+          <Form.Item
+            name="Phone Number"
+            label="Phone Number"
+            hasFeedback
+            rules={[{ required: true, message: 'Please enter your Phone Number', }]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            name="members"
+            label="Number of family members"
+            hasFeedback
+          >
+            <Input />
+          </Form.Item>
+        </div>
+
+        <div>
+          <Form.Item
+            name="Occupation"
+            label="Householder occupation"
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            name="monthly income"
+            label="Monthly Income"
+              >
+                <Input />
+          </Form.Item>
+        
+
+        
+          <Form.Item name="requestor" label="Requesting type">
+            <Radio.Group onChange={handleRequestorChange}>
+              <Radio value="a">Dry food</Radio>
+              <Radio value="b">Stationary</Radio>
+              <Radio value="c">Money</Radio>
+            </Radio.Group>
+          </Form.Item>
+
+        
+        </div>  
     <Form.Item
-      name="radio-button"
-      label="Radio.Button"
-      rules={[
-        {
-          required: true,
-          message: 'Please pick an item!',
-        },
-      ]}
-    >
- 
-      <Radio.Group>
-        <Radio.Button value="a">item 1</Radio.Button>
-        <Radio.Button value="b">item 2</Radio.Button>
-        <Radio.Button value="c">item 3</Radio.Button>
-      </Radio.Group>
-    </Form.Item>
-
-    <Form.Item name="checkbox-group" label="Checkbox.Group">
-      <Checkbox.Group>
-        <Row>
-          <Col span={8}>
-            <Checkbox
-              value="A"
-              style={{
-                lineHeight: '32px',
-              }}
-            >
-              A
-            </Checkbox>
-          </Col>
-          <Col span={8}>
-            <Checkbox
-              value="B"
-              style={{
-                lineHeight: '32px',
-              }}
-              disabled
-            >
-              B
-            </Checkbox>
-          </Col>
-          <Col span={8}>
-            <Checkbox
-              value="C"
-              style={{
-                lineHeight: '32px',
-              }}
-            >
-              C
-            </Checkbox>
-          </Col>
-          <Col span={8}>
-            <Checkbox
-              value="D"
-              style={{
-                lineHeight: '32px',
-              }}
-            >
-              D
-            </Checkbox>
-          </Col>
-          <Col span={8}>
-            <Checkbox
-              value="E"
-              style={{
-                lineHeight: '32px',
-              }}
-            >
-              E
-            </Checkbox>
-          </Col>
-          <Col span={8}>
-            <Checkbox
-              value="F"
-              style={{
-                lineHeight: '32px',
-              }}
-            >
-              F
-            </Checkbox>
-          </Col>
-        </Row>
-      </Checkbox.Group>
-    </Form.Item>
-
-    <Form.Item name="rate" label="Rate">
-      <Rate />
-    </Form.Item>
-
-    <Form.Item
-      name="upload"
-      label="Upload"
-      valuePropName="fileList"
-      getValueFromEvent={normFile}
-      extra="longgggggggggggggggggggggggggggggggggg"
-    >
-      <Upload name="logo" action="/upload.do" listType="picture">
-        <Button icon={<UploadOutlined />}>Click to upload</Button>
-      </Upload>
-    </Form.Item>
-
-    <Form.Item label="Dragger">
-      <Form.Item name="dragger" valuePropName="fileList" getValueFromEvent={normFile} noStyle>
-        <Upload.Dragger name="files" action="/upload.do">
-          <p className="ant-upload-drag-icon">
-            <InboxOutlined />
-          </p>
-          <p className="ant-upload-text">Click or drag file to this area to upload</p>
-          <p className="ant-upload-hint">Support for a single or bulk upload.</p>
-        </Upload.Dragger>
+            name="reason"
+            label="Reason for requesting Donations"
+          >
+            <Input />
       </Form.Item>
-    </Form.Item>
     
     <Form.Item
       wrapperCol={{
@@ -290,5 +166,7 @@ const Benificiary = () => (
   </Form>
    
   </div>
+
 );
+    }
 export default Benificiary;

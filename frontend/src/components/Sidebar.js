@@ -4,6 +4,7 @@ import './style.css'
 
 
 
+
 function Sidebar() 
 {  
     return (    
@@ -15,12 +16,18 @@ function Sidebar()
     <div className='bg-white sidebar p-2'>
         <div className='m-2'>
         <i className='bi bi-donation me-3 fs-4'></i>  
-            <img src='./images/donation.png'  className='me-2' />
+            <img url='/images/donation.png' align= "center" className='me-2' />
+        </div>
+    </div>
+
+    <div className='bg-white sidebar p-2'>
+        <div className='m-2'>
+        <i className='bi bi-donation me-3 fs-4'></i>   
             <span className='brand-name fs-4'>DoNation</span>
         </div>
     </div>
 
-                <hr className='text-dark' />        
+                   
     <div className='list-group list-group-flush'>    
      <button>
         <a className='list-group-item py-2'>              
@@ -36,13 +43,27 @@ function Sidebar()
         </Link>
     </button>
 
+    <button>
+        <Link to='/createben' className='list-group-item py-2'>
+            <i className='bi bi-house fs-5 me-3'></i>
+            <span>createben</span>
+        </Link>
+    </button>
+
+    <button>
+        <Link to='/createdon' className='list-group-item py-2'>
+            <i className='bi bi-house fs-5 me-3'></i>
+            <span>createdon</span>
+        </Link>
+    </button>
+
     <button>      
         <a className='list-group-item py-2'>              
             <i className='bi bi-table fs-5 me-3'></i>              
                 <span >Jobs</span>            
         </a>  
     </button>
-
+    
     <button>         
         <a className='list-group-item py-2'>             
             <i className='bi bi-clipboard-data fs-5 me-3'></i>              
@@ -51,14 +72,14 @@ function Sidebar()
     </button>
 
     <button>           
-    <Link to='/' className='list-group-item py-2'>
+    <Link to='/editbenificiary' className='list-group-item py-2'>
             <i className='bi bi-house fs-5 me-3'></i>
             <span>Benificiaries</span>
         </Link>
     </button>
 
     <button>    
-    <Link to='/signup' className='list-group-item py-2'>
+    <Link to='/editdonator' className='list-group-item py-2'>
             <i className='bi bi-house fs-5 me-3'></i>
             <span>Donators</span>
         </Link>  
