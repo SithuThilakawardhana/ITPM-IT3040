@@ -1,53 +1,71 @@
-import { SmileOutlined } from '@ant-design/icons';
+import { InboxOutlined, UploadOutlined } from '@ant-design/icons';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useState } from 'react';
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import {
-  Cascader,
-  DatePicker,
+  Button,
+  Checkbox,
+  Col,
   Form,
   Input,
-  InputNumber,
-  Mentions,
+  Radio,
   Select,
-  TimePicker,
-  TreeSelect,
+  Space,
 } from 'antd';
+
+
 const { Option } = Select;
 const formItemLayout = {
   labelCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 6,
-    },
+    span: 6,
   },
   wrapperCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 14,
-    },
+    span: 10,
   },
 };
-const Donator = () => (
-  <div style={{
-    backgroundImage: "url('donator.jpg')",
-    backgroundSize: 'cover',
-    opacity: 0.8, // set opacity here
-    minHeight: '100vh', // to cover the full screen
-  }}>
-    
-  <Form
-    {...formItemLayout}
-    style={{
-      maxWidth: 2000,
-    }}
-  >
+const onFinish = (values) => {
+  console.log('Received values of form: ', values);
+};
 
-    <Navbar />
-    <Form
+const theme = createTheme();
+const Donator = () => {
+  const [showPaymentForm, setShowPaymentForm] = useState(false);
+
+  const handleRequestorChange = (e) => {
+    if (e.target.value === 'c') {
+      setShowPaymentForm(true);
+    } else {
+      setShowPaymentForm(false);
+    }
+
+  };
+
+  return (
+    <div style={{
+      backgroundImage: "url('poverty.jpg')",
+      backgroundSize: 'cover',
+      opacity: 0.8, // set opacity here
+      minHeight: '100vh', // to cover the full screen
+    }}>
+      <Form
+        name="validate_other"
+        {...formItemLayout}
+        onFinish={onFinish}
+        initialValues={{
+          'input-number': 3,
+          'checkbox-group': ['A', 'B'],
+          rate: 3.5,
+        }}
+        style={{
+          maxWidth: 2000,
+        }}
+      >
+
+<Navbar />
+
+<Form
       {...formItemLayout}
       style={{
         maxWidth: 2000,
@@ -55,172 +73,111 @@ const Donator = () => (
       }}
     >
     </Form>
+
+<ThemeProvider theme={theme}></ThemeProvider>
+      <Container component="main" maxWidth="100%"></Container>
+      <span style={{fontWeight: 'bold', display: 'flex' , justifyContent:' center', fontSize: '30px'}}>Can I be a Support?</span>
+     <br/>
+   
+     <Form.Item
+            name="Name"
+            label="Name"
+            hasFeedback
+            rules={[    {      required: true,      message: 'Please enter your name',    },  ]}
+          >
+            <Input />
+      </Form.Item>
+
+      <Form.Item
+            name="username"
+            label="Username"
+            hasFeedback
+            rules={[    {      required: true,      message: 'Please enter your Username',    },  ]}
+          >
+            <Input />
+      </Form.Item>
+
+      <Form.Item
+            name="Address"
+            label="Address"
+            hasFeedback
+            rules={[    {      required: true,      message: 'Please enter your Address',    },  ]}
+          >
+            <Input />
+      </Form.Item>
+
+    <Form.Item name="Donate" label="Donate">
+      <Checkbox.Group>
+        
+          <Col span={20}>
+            <Checkbox
+              value="Dry food"
+              style={{
+                lineHeight: '32px',
+              }}
+            >
+              Dry food
+            </Checkbox>
+          </Col>
+          <Col span={20}>
+            <Checkbox
+              value="Stationary"
+              style={{
+                lineHeight: '32px',
+              }}
+            >
+              Stationary
+            </Checkbox>
+          </Col>
+          <Col span={20}>
+            <Checkbox
+              value="Money"
+              style={{
+                lineHeight: '32px',
+              }}
+            >
+              Money
+            </Checkbox>
+          </Col>
+        
+      </Checkbox.Group>
+    </Form.Item>
+
+   
+ <Form.Item name="Donating mode" label="Donating mode">
+      <Radio.Group>
+        <Radio value="a">Deliver to the Benificiary</Radio>
+        <Radio value="b">Pick from Donator</Radio>
+        <Radio value="c">Bank Deposit</Radio>
+      </Radio.Group>
+      
+      {showPaymentForm && (
+            <Form.Item name="payment" label="Payment">
+              <Input type="number" placeholder="Enter payment amount" />
+            </Form.Item>
+          )}
+    </Form.Item>
+    
     <Form.Item
-      label="Fail"
-      validateStatus="error"
-      help="Should be combination of numbers & alphabets"
-    >
-      <Input placeholder="unavailable choice" id="error" />
-    </Form.Item>
-
-    <Form.Item label="Warning" validateStatus="warning">
-      <Input placeholder="Warning" id="warning" prefix={<SmileOutlined />} />
-    </Form.Item>
-
-    <Form.Item
-      label="Validating"
-      hasFeedback
-      validateStatus="validating"
-      help="The information is being validated..."
-    >
-      <Input placeholder="I'm the content is being validated" id="validating" />
-    </Form.Item>
-
-    <Form.Item label="Success" hasFeedback validateStatus="success">
-      <Input placeholder="I'm the content" id="success" />
-    </Form.Item>
-
-    <Form.Item label="Warning" hasFeedback validateStatus="warning">
-      <Input placeholder="Warning" id="warning2" />
-    </Form.Item>
-
-    <Form.Item
-      label="Fail"
-      hasFeedback
-      validateStatus="error"
-      help="Should be combination of numbers & alphabets"
-    >
-      <Input placeholder="unavailable choice" id="error2" />
-    </Form.Item>
-
-    <Form.Item label="Success" hasFeedback validateStatus="success">
-      <DatePicker
-        style={{
-          width: '100%',
-        }}
-      />
-    </Form.Item>
-
-    <Form.Item label="Warning" hasFeedback validateStatus="warning">
-      <TimePicker
-        style={{
-          width: '100%',
-        }}
-      />
-    </Form.Item>
-
-    <Form.Item label="Error" hasFeedback validateStatus="error">
-      <DatePicker.RangePicker
-        style={{
-          width: '100%',
-        }}
-      />
-    </Form.Item>
-
-    <Form.Item label="Error" hasFeedback validateStatus="error">
-      <Select placeholder="I'm Select" allowClear>
-        <Option value="1">Option 1</Option>
-        <Option value="2">Option 2</Option>
-        <Option value="3">Option 3</Option>
-      </Select>
-    </Form.Item>
-
-    <Form.Item
-      label="Validating"
-      hasFeedback
-      validateStatus="error"
-      help="Something breaks the rule."
-    >
-      <Cascader
-        placeholder="I'm Cascader"
-        options={[
-          {
-            value: 'xx',
-            label: 'xx',
-          },
-        ]}
-        allowClear
-      />
-    </Form.Item>
-
-    <Form.Item label="Warning" hasFeedback validateStatus="warning" help="Need to be checked">
-      <TreeSelect
-        placeholder="I'm TreeSelect"
-        treeData={[
-          {
-            value: 'xx',
-            label: 'xx',
-          },
-        ]}
-        allowClear
-      />
-    </Form.Item>
-
-    <Form.Item
-      label="inline"
-      style={{
-        marginBottom: 0,
+      wrapperCol={{
+        span: 12,
+        offset: 6,
       }}
     >
-      <Form.Item
-        validateStatus="error"
-        help="Please select right date"
-        style={{
-          display: 'inline-block',
-          width: 'calc(50% - 12px)',
-        }}
-      >
-        <DatePicker />
-      </Form.Item>
-      <span
-        style={{
-          display: 'inline-block',
-          width: '24px',
-          lineHeight: '32px',
-          textAlign: 'center',
-        }}
-      >
-        -
-      </span>
-      <Form.Item
-        style={{
-          display: 'inline-block',
-          width: 'calc(50% - 12px)',
-        }}
-      >
-        <DatePicker />
-      </Form.Item>
+      <Space>
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+        <Button htmlType="reset">reset</Button>
+      </Space>
     </Form.Item>
-
-    <Form.Item label="Success" hasFeedback validateStatus="success">
-      <InputNumber
-        style={{
-          width: '100%',
-        }}
-      />
-    </Form.Item>
-
-    <Form.Item label="Success" hasFeedback validateStatus="success">
-      <Input allowClear placeholder="with allowClear" />
-    </Form.Item>
-
-    <Form.Item label="Warning" hasFeedback validateStatus="warning">
-      <Input.Password placeholder="with input password" />
-    </Form.Item>
-
-    <Form.Item label="Error" hasFeedback validateStatus="error">
-      <Input.Password allowClear placeholder="with input password and allowClear" />
-    </Form.Item>
-
-    <Form.Item label="Fail" validateStatus="error" hasFeedback>
-      <Mentions />
-    </Form.Item>
-
-    <Form.Item label="Fail" validateStatus="error" hasFeedback help="Should have something">
-      <Input.TextArea allowClear showCount />
-    </Form.Item>
+    <br></br>
+    
     <Footer />
   </Form>
+   
   </div>
+
 );
+    }
 export default Donator;

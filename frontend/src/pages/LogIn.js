@@ -11,6 +11,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userSignInAction } from '../redux/actions/userAction';
 import { Link, useNavigate } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
+// import styles from "./styles.module.css";
+import { useState } from "react";
+import axios from "axios";
+
 
 const validationSchema = yup.object({
     email: yup
@@ -26,6 +30,33 @@ const validationSchema = yup.object({
 
 
 const LogIn = () => {
+
+    const [data, setData] = useState({ email: "", password: "" });
+	const [error, setError] = useState("");
+
+	const handleChange = ({ currentTarget: input }) => {
+		setData({ ...data, [input.name]: input.value });
+	};
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		try {
+			const url = "http://localhost:8080/api/auth";
+			const { data: res } = await axios.post(url, data);
+			localStorage.setItem("token", res.data);
+			window.location = "/";
+		} catch (error) {
+			if (
+				error.response &&
+				error.response.status >= 400 &&
+				error.response.status <= 500
+			) {
+				setError(error.response.data.message);
+			}
+		}
+	};
+
+    
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { isAuthenticated, userInfo } = useSelector(state => state.signIn);
@@ -67,35 +98,46 @@ const LogIn = () => {
                         </Avatar>
                         <TextField sx={{ mb: 3 }}
                             fullWidth
+                            type="email"
                             id="email"
+                            onChange={handleChange}
+							value={data.email}
+							required
+							// className={styles.input}
                             label="E-mail"
                             name='email'
                             InputLabelProps={{
                                 shrink: true,
                             }}
                             placeholder="E-mail"
-                            value={formik.values.email}
-                            onChange={formik.handleChange}
+                            // value={formik.values.email}
+                            // onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             error={formik.touched.email && Boolean(formik.errors.email)}
                             helperText={formik.touched.email && formik.errors.email}
                         />
                         <TextField sx={{ mb: 3 }}
                             fullWidth
+                            type="password"
                             id="password"
                             name="password"
                             label="Password"
-                            type="password"
+                            onChange={handleChange}
+							value={data.password}
+							required
+							// className={styles.input}
                             InputLabelProps={{
                                 shrink: true,
                             }}
                             placeholder="Password"
-                            value={formik.values.password}
-                            onChange={formik.handleChange}
+                            // value={formik.values.password}
+                            // onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             error={formik.touched.password && Boolean(formik.errors.password)}
                             helperText={formik.touched.password && formik.errors.password}
                         />
+
+                        {error && <div >{error}</div>}
 
                         <Button fullWidth variant="contained" type='submit' >
                         <Link to='/dashboard' style={{ color: 'white', textDecoration: "none" }}>

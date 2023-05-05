@@ -7,11 +7,27 @@ require("dotenv").config();
 var cors = require('cors');
 
 
+//login register routes
+const userRoutes = require("./routes/users");
+const authRoutes = require("./routes/auth");
+
+// login register routes
+app.use("/api/users", userRoutes);
+app.use("/api/auth", authRoutes);
+
+
+
+
+
+
+
+
+
 
 
 // import routes
-const authRoutes = require('./routes/authRoutes');
-const userRoutes = require('./routes/userRoutes');
+// const authRoutes = require('./routes/authRoutes');
+// const userRoutes = require('./routes/userRoutes');
 const donateTypeRoute = require('./routes/donateTypeRoutes');
 const donateRoute = require('./routes/donateRoutes');
 

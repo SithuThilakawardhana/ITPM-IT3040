@@ -1,9 +1,38 @@
 .sidebar{
     width: 200px;
+    background-color: blue;
+    border: none;
 }
 
 .list-group a:hover{
     background-color: blue;
     color: white;
     cursor: pointer;
+    border: none;
+}
+
+.container-fluid{
+    background-color: blue;
+}
+
+.px-3 {
+    background-color: blue;
+}
+
+.row {
+    background-color: blue;
+}
+
+.row {
+    background-color: blue;
+}
+
+
+.col-md-3 {
+    background-color: blue;
+}
+
+
+.table {
+    background-color: blue;
 }

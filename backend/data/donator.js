@@ -27,4 +27,4 @@ const donator = [
     },
   ];
   
-  module.exports = donator;
+  export default donator;

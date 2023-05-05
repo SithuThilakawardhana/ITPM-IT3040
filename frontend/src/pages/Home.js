@@ -11,7 +11,7 @@ import LoadingBox from '../components/LoadingBox'
 import SelectComponent from '../components/SelectComponent'
 import { donateTypeLoadAction } from '../redux/actions/donateTypeAction'
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-
+// import styles from "./styles.module.css";
 
 
 const Home = () => {
