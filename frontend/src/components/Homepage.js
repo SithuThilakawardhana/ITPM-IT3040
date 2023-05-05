@@ -51,7 +51,7 @@ function Homepage({ Toggle }) {
                     </div>           
                 </div>
 
-
+                <div>
                     <table class="table caption-top bg-white rounded mt-2">                
                     <caption className='text-white fs-4'>Recent Donations</caption>                
                         <thead>                    
@@ -102,7 +102,8 @@ function Homepage({ Toggle }) {
                             </tr>                
                         </tbody>           
                     </table>        
-                </div>    
+                </div> 
+                </div>   
                 
             )
         }

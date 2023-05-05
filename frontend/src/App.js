@@ -23,6 +23,7 @@ import LogInBenificiary from './pages/LogInBenificiary';
 import Donator from './pages/Donator';
 import Benificiary from './pages/Benificiary';
 import SignUp from './pages/SignUp';
+import Main from './pages/Main';
 import SignUpD from './pages/SignUpD';
 import AboutUs from './pages/AboutUs';
 import Dashboard from './components/Dashboard';
@@ -31,7 +32,7 @@ import EditDonator from './components/EditDonator';
 import CreateBen from './components/CreateBen';
 import CreateDon from './components/CreateDon';
 import Table from './components/Table/Table';
-import {HashRouter,useNavigate} from "react-router-dom";
+import {HashRouter,useNavigate,Navigate} from "react-router-dom";
 
 
 
@@ -54,8 +55,8 @@ function App () {
                 <ProSidebarProvider>
                     <BrowserRouter>
                         <Routes>
-                        {/* <Route path='/' element={<Home />} /> */}
-                             {user && <Route path="/" exact element={<Home />} />}
+                        <Route path='/home' element={<Home />} />
+                            {user && <Route path="/" exact element={<Main/>} />}
                             <Route path="/signup" exact element={<SignUp />} />
                             <Route path="/login" exact element={<LogIn />} />
                             <Route path="/" element={<Navigate replace to="/login" />} />
