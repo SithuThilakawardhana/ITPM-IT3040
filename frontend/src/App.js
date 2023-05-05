@@ -26,6 +26,14 @@ import SignUp from './pages/SignUp';
 import SignUpD from './pages/SignUpD';
 import AboutUs from './pages/AboutUs';
 import Dashboard from './components/Dashboard';
+import EditBenificiary from './components/EditBenificiary';
+import EditDonator from './components/EditDonator';
+import CreateBen from './components/CreateBen';
+import CreateDon from './components/CreateDon';
+import Table from './components/Table/Table';
+import {HashRouter,useNavigate} from "react-router-dom";
+
+
 
 //HOC
 const UserDashboardHOC = Layout(UserDashboard);
@@ -36,8 +44,8 @@ const DashUsersHOC = Layout(DashUsers);
 const DashdonateHOC = Layout(Dashdonate);
 
 
-const App = () => {
-
+function App () {
+    const user = localStorage.getItem("token");
     return (
         <>
             <ToastContainer />
@@ -46,16 +54,25 @@ const App = () => {
                 <ProSidebarProvider>
                     <BrowserRouter>
                         <Routes>
-                        <Route path='/' element={<Home />} />
+                        {/* <Route path='/' element={<Home />} /> */}
+                             {user && <Route path="/" exact element={<Home />} />}
+                            <Route path="/signup" exact element={<SignUp />} />
+                            <Route path="/login" exact element={<LogIn />} />
+                            <Route path="/" element={<Navigate replace to="/login" />} />
+                            
                             <Route path='/search/location/:location' element={<Home />} />
                             <Route path='/search/:keyword' element={<Home />} />
-                            <Route path='/login' element={<LogIn />} />
+                            {/* <Route path='/login' element={<LogIn />} /> */}
                             <Route path='/logindonator' element={<LogInDonator />} />
-                            <Route path='/signup' element={<SignUp />} />
+                            {/* <Route path='/signup' element={<SignUp />} /> */}
                             <Route path='/signupd' element={<SignUpD />} />
                             <Route path='/aboutus' element={<AboutUs />} />
                             <Route path='/loginbenificiary' element={<LogInBenificiary />} />
                             <Route path='/benificiary' element={<Benificiary />} />
+                            <Route path='/editbenificiary' element={<EditBenificiary />} />
+                            <Route path='/editdonator' element={<EditDonator />} />
+                            <Route path='/createben' element={<CreateBen />} />
+                            <Route path='/createdon' element={<CreateDon />} />
                             <Route path='/donator' element={<Donator />} />
                             <Route path='/dashboard' element={<Dashboard />} />
                             <Route path='/donate/:id' element={<Singledonate />} />
@@ -66,6 +83,7 @@ const App = () => {
                             <Route path='/user/donate' element={<UserRoute>< UserdonateHistoryHOC /></UserRoute>} />
                             <Route path='/user/info' element={<UserRoute>< UserInfoDashboardHOC /></UserRoute>} />
                             <Route path='*' element={<NotFound />} />
+                            <Route path='/table' element={<Table/>}/>
                         </Routes>
                     </BrowserRouter>
                 </ProSidebarProvider>
@@ -74,4 +92,21 @@ const App = () => {
     )
 }
 
-export default App
+export default App;
+
+
+
+// function App(){
+
+//     const nevigate=useNavigate()
+//     let startroute=(url)=>{
+//       nevigate(url)
+//     }
+//   return(
+//   <div>
+//   <div className="main-container">
+//     <button className='button-to-route' onClick={()=>startroute("/table")}>Table I/O delet/Update</button>
+//   </div>
+//   </div>
+//   );
+//   }
