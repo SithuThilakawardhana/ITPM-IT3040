@@ -20,7 +20,7 @@ function Nav({Toggle}) {
                         <div className="dropdown-menu" aria-labelledby="dropdownId">                            
                     <a className="dropdown-item" href="#">Profile</a>                            
                     <a className="dropdown-item" href="#">Setting</a>                            
-                    <a className="dropdown-item" href="#">Logout</a>                        
+                    <a className="dropdown-item" href="/">Logout</a>                        
         </div>                    
         </li>                
         </ul>            

@@ -31,8 +31,16 @@ import EditBenificiary from './components/EditBenificiary';
 import EditDonator from './components/EditDonator';
 import CreateBen from './components/CreateBen';
 import CreateDon from './components/CreateDon';
-import Table from './components/Table/Table';
 import {HashRouter,useNavigate,Navigate} from "react-router-dom";
+import DonatorListing from './pages/DonatorListing';
+import DonatorCreate from './pages/DonatorCreate';
+import DonatorDetails from './pages/DonatorDetails';
+import DonatorEdit from './pages/DonatorEdit';
+import BenListing from './pages/BenListing';
+import BenCreate from './pages/BenCreate';
+import BenDetails from './pages/BenDetails';
+import BenEdit from './pages/BenEdit';
+
 
 
 
@@ -55,12 +63,23 @@ function App () {
                 <ProSidebarProvider>
                     <BrowserRouter>
                         <Routes>
-                        <Route path='/home' element={<Home />} />
-                            {user && <Route path="/" exact element={<Main/>} />}
+                        <Route path='/' element={<Home />} />
+                            {user && <Route path="/main" exact element={<Main/>} />}
                             <Route path="/signup" exact element={<SignUp />} />
                             <Route path="/login" exact element={<LogIn />} />
                             <Route path="/" element={<Navigate replace to="/login" />} />
                             
+                            <Route path='/donatorlisting' element={<DonatorListing />}></Route>
+                            <Route path='/donator/create' element={<DonatorCreate />}></Route>
+                            <Route path='/donator/detail/:empid' element={<DonatorDetails />}></Route>
+                            <Route path='/donator/edit/:empid' element={<DonatorEdit />}></Route> 
+
+                            <Route path='/benlisting' element={<BenListing />}></Route>
+                            <Route path='/ben/create' element={<BenCreate />}></Route>
+                            <Route path='/ben/detail/:empid' element={<BenDetails />}></Route>
+                            <Route path='/ben/edit/:empid' element={<BenEdit />}></Route> 
+
+
                             <Route path='/search/location/:location' element={<Home />} />
                             <Route path='/search/:keyword' element={<Home />} />
                             {/* <Route path='/login' element={<LogIn />} /> */}
@@ -84,7 +103,7 @@ function App () {
                             <Route path='/user/donate' element={<UserRoute>< UserdonateHistoryHOC /></UserRoute>} />
                             <Route path='/user/info' element={<UserRoute>< UserInfoDashboardHOC /></UserRoute>} />
                             <Route path='*' element={<NotFound />} />
-                            <Route path='/table' element={<Table/>}/>
+                           
                         </Routes>
                     </BrowserRouter>
                 </ProSidebarProvider>
