@@ -5,20 +5,11 @@ import './style.css'
 
 
 
-function Sidebar() 
+const Sidebar = () =>
 {  
     return (    
-    <div className='bg-white sidebar p-8'>        
-    {/* <div className='m-2'>           
-            <i className='bi bi-bootstrap-fill me-3 fs-4'></i>           
-                <span className='brand-name fs-4'>DoNation</span>       
-    </div>        */}
-    {/* <div className='bg-white sidebar p-2'>
-        <div className='m-2'>
-        <i className='bi bi-donation me-3 fs-4'></i>  
-            <img url='/images/donation.png' align= "center" className='me-2' />
-        </div>
-    </div> */}
+    <div className='bg-white sidebar p-8 '>        
+
 
     <div className='bg-white sidebar p-2'>
         <div className='m-2'>
@@ -35,7 +26,7 @@ function Sidebar()
                 <span >Dashboard</span>         
         </a>            
     </button>
-
+<br/>
     <button>
         <Link to='/' className='list-group-item py-2'>
             <i className='bi bi-house fs-5 me-3'></i>
@@ -43,7 +34,7 @@ function Sidebar()
         </Link>
     </button>
 
-    <button>
+    {/* <button>
         <Link to='/createben' className='list-group-item py-2'>
             <i className='bi bi-house fs-5 me-3'></i>
             <span>createben</span>
@@ -55,36 +46,36 @@ function Sidebar()
             <i className='bi bi-house fs-5 me-3'></i>
             <span>createdon</span>
         </Link>
-    </button>
-
-    {/* <button>      
+    </button> */}
+<br/>
+    <button>      
         <a className='list-group-item py-2'>              
             <i className='bi bi-table fs-5 me-3'></i>              
                 <span >Jobs</span>            
         </a>  
-    </button> */}
-    
-    {/* <button>         
+    </button> 
+    <br/>
+    <button>         
         <a className='list-group-item py-2'>             
             <i className='bi bi-clipboard-data fs-5 me-3'></i>              
                 <span >Courses</span>           
         </a> 
-    </button> */}
-
+    </button> 
+    <br/>
     <button>           
-    <Link to='/editbenificiary' className='list-group-item py-2'>
+    <Link to='/benlisting' className='list-group-item py-2'>
             <i className='bi bi-house fs-5 me-3'></i>
             <span>Benificiaries</span>
         </Link>
     </button>
-
+    <br/>
     <button>    
-    <Link to='/editdonator' className='list-group-item py-2'>
+    <Link to='/donatorlisting' className='list-group-item py-2'>
             <i className='bi bi-house fs-5 me-3'></i>
             <span>Donators</span>
         </Link>  
     </button>
-
+<br/>
     <button>    
         <a className='list-group-item py-2'>               
             <i className='bi bi-power fs-5 me-3'></i>             
@@ -95,4 +86,4 @@ function Sidebar()
     </div>  
     )
 }
-export default Sidebar
+export default Sidebar;

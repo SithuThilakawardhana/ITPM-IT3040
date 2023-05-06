@@ -38,7 +38,7 @@ export default function Album() {
             pb: 6,
           }}
         >
-          <Container maxWidth="sm">
+          <Container maxWidth="10"  height= '79vh'>
             <Typography
               component="h1"
               variant="h2"
@@ -54,13 +54,11 @@ export default function Album() {
               don&apos;t simply skip over it entirely.
             </Typography>
             <Stack
-              sx={{ pt: 4 }}
+              sx={{ pt: 1 }}
               direction="row"
-              spacing={2}
+              spacing={1}
               justifyContent="center"
             >
-              <Button variant="contained">Main call to action</Button>
-              <Button variant="outlined">Secondary action</Button>
             </Stack>
           </Container>
         </Box>

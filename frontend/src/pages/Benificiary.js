@@ -1,7 +1,7 @@
 import { InboxOutlined, UploadOutlined } from '@ant-design/icons';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useState } from 'react';
+import React, { useState } from "react";
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import {
@@ -41,6 +41,17 @@ const Benificiary = () => {
     }
 
   };
+
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const onFinish = (values) => {
+    setIsSubmitting(true);
+    console.log("Received values of form: ", values);
+    // Submit the form data to the server or perform other actions here
+    setIsSubmitting(false);
+  };
+
 
   return (
     <div style={{
@@ -86,7 +97,7 @@ const Benificiary = () => {
           rules={[{ required: true, message: 'Please enter your Full name', }]}
         >
           <Input />
-        </Form.Item>
+        </Form.Item> 
 
         <Form.Item
           name="Address"
@@ -98,7 +109,7 @@ const Benificiary = () => {
         </Form.Item>
         <div>
           <Form.Item
-            name="Phone Number"
+            name="PhoneNumber"
             label="Phone Number"
             hasFeedback
             rules={[{ required: true, message: 'Please enter your Phone Number', }]}
@@ -156,7 +167,7 @@ const Benificiary = () => {
       }}
     >
       <Space>
-        <Button type="primary" htmlType="submit">
+        <Button href='/' type="primary" htmlType="submit" disabled={isSubmitting}>
           Submit
         </Button>
         <Button htmlType="reset">reset</Button>

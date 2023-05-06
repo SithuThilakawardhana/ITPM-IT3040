@@ -75,13 +75,14 @@ const Donator = () => {
     </Form>
 
 <ThemeProvider theme={theme}></ThemeProvider>
-      <Container component="main" maxWidth="100%"></Container>
+      <Container component="main" maxWidth="70%" height="80"  marginTop= '200px'></Container>
       <span style={{fontWeight: 'bold', display: 'flex' , justifyContent:' center', fontSize: '30px'}}>Can I be a Support?</span>
      <br/>
    
      <Form.Item
             name="Name"
             label="Name"
+            value="name"
             hasFeedback
             rules={[    {      required: true,      message: 'Please enter your name',    },  ]}
           >
@@ -89,10 +90,11 @@ const Donator = () => {
       </Form.Item>
 
       <Form.Item
-            name="username"
-            label="Username"
+            name="phone"
+            label="Phone Number"
+            value="phone"
             hasFeedback
-            rules={[    {      required: true,      message: 'Please enter your Username',    },  ]}
+            rules={[    {      required: true,      message: 'Please enter your Phone Number',    },  ]}
           >
             <Input />
       </Form.Item>
@@ -100,18 +102,19 @@ const Donator = () => {
       <Form.Item
             name="Address"
             label="Address"
+            value="address"
             hasFeedback
             rules={[    {      required: true,      message: 'Please enter your Address',    },  ]}
           >
             <Input />
       </Form.Item>
 
-    <Form.Item name="Donate" label="Donate">
+    <Form.Item name="Donate" value="donate" label="Donate">
       <Checkbox.Group>
         
           <Col span={20}>
             <Checkbox
-              value="Dry food"
+              value="dryfood"
               style={{
                 lineHeight: '32px',
               }}
@@ -121,7 +124,7 @@ const Donator = () => {
           </Col>
           <Col span={20}>
             <Checkbox
-              value="Stationary"
+              value="stationary"
               style={{
                 lineHeight: '32px',
               }}
@@ -131,7 +134,7 @@ const Donator = () => {
           </Col>
           <Col span={20}>
             <Checkbox
-              value="Money"
+              value="money"
               style={{
                 lineHeight: '32px',
               }}
@@ -165,14 +168,14 @@ const Donator = () => {
       }}
     >
       <Space>
-        <Button type="primary" htmlType="submit">
+        <Button href='/' type="primary" htmlType="submit">
           Submit
         </Button>
         <Button htmlType="reset">reset</Button>
       </Space>
     </Form.Item>
     <br></br>
-    
+    <br></br> <br></br> <br></br>
     <Footer />
   </Form>
    

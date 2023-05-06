@@ -6,7 +6,8 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 // import Dashboard from './Dashboard';
 // import { BrowserRouter } from "react-router-dom";
-import "./index.css";
+import reportWebVitals from './reportWebVitals';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 
 
@@ -23,3 +24,4 @@ root.render(
   </React.StrictMode>
 );
 
+reportWebVitals();
