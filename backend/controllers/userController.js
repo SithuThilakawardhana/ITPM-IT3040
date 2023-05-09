@@ -1,93 +1,95 @@
-import asyncHandler from "express-async-handler";
-import User from "../models/userModel.js";
-import generateToken from "../utils/generateToken.js";
+const User = require('../models/userModel');
+const ErrorResponse = require('../utils/errorResponse');
 
-//@description     Auth the user
-//@route           POST /api/users/login
-//@access          Public
-const authUser = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
+// load all users
+exports.allUsers = async (req, res, next) =>{
+    //  enable pagination
+    const pageSize = 10;
+    const page = Number(req.query.pageNumber) || 1;
+    const count = await User.find({}).estimatedDocumentCount();
 
-  const user = await User.findOne({ email });
+    try {
+        const users = await User.find().sort({ createdAt: -1}).select('-password')
+        .skip(pageSize * (page-1))
+        .limit((pageSize))
 
-  if (user && (await user.matchPassword(password))) {
-    res.json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      isAdmin: user.isAdmin,
-      pic: user.pic,
-      token: generateToken(user._id),
-    });
-  } else {
-    res.status(401);
-    throw new Error("Invalid Email or Password");
-  }
-});
-
-//@description     Register new user
-//@route           POST /api/users/
-//@access          Public
-const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password, pic } = req.body;
-
-  const userExists = await User.findOne({ email });
-
-  if (userExists) {
-    res.status(404);
-    throw new Error("User already exists");
-  }
-
-  const user = await User.create({
-    name,
-    email,
-    password,
-    pic,
-  });
-
-  if (user) {
-    res.status(201).json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      isAdmin: user.isAdmin,
-      pic: user.pic,
-      token: generateToken(user._id),
-    });
-  } else {
-    res.status(400);
-    throw new Error("User not found");
-  }
-});
-
-// @desc    GET user profile
-// @route   GET /api/users/profile
-// @access  Private
-const updateUserProfile = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id);
-
-  if (user) {
-    user.name = req.body.name || user.name;
-    user.email = req.body.email || user.email;
-    user.pic = req.body.pic || user.pic;
-    if (req.body.password) {
-      user.password = req.body.password;
+        res.status(200).json({
+            success : true,
+            users,
+            page,
+            pages : Math.ceil(count / pageSize),
+        })
+    } catch (error) {
+        return next(eror);
     }
+}
 
-    const updatedUser = await user.save();
+// show single user
+exports.singleUser = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.params.id);
+        res.status(200).json({
+            success: true,
+            user
+        })
+        next();
+    } catch (error) {
+        return next(error);
+    }
+}
 
-    res.json({
-      _id: updatedUser._id,
-      name: updatedUser.name,
-      email: updatedUser.email,
-      pic: updatedUser.pic,
-      isAdmin: updatedUser.isAdmin,
-      token: generateToken(updatedUser._id),
-    });
-  } else {
-    res.status(404);
-    throw new Error("User Not Found");
-  }
-});
+// edit user
+exports.editUser = async (req, res, next) => {
+    try {
+        const user = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
+        res.status(200).json({
+            success: true,
+            user
+        })
+        next();
+    } catch (error) {
+        return next(error);
+    }
+}
 
-export { authUser, updateUserProfile, registerUser };
+// delete user
+exports.deleteUser = async (req, res, next) => {
+    try {
+        const user = await User.findByIdAndUpdate(req.params.id);
+        res.status(200).json({
+            success: true,
+            message : "user deleted"
+        })
+        next();
+    } catch (error) {
+        return next(error);
+    }
+}
+
+// jobs history
+exports.createUserJobsHistory = async (req, res, next) => {
+    const {title, description, salary, location} = req.body;
+    try {
+        const currentUser = await User.findOne({_id: req.user._id});
+        if (!currentUser){
+            return next(new ErrorResponse("You must log In", 401));
+        }else{
+            const addJobHistory = {
+                title,
+                description,
+                salary,
+                location,
+                user: req.user._id
+            }
+            currentUser.jobsHistory.push(addJobHistory);
+            await currentUser.save();
+        }
+        res.status(200).json({
+            success: true,
+            currentUser
+        })
+        next();
+    } catch (error) {
+        return next(error);
+    }
+}
