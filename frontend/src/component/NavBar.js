@@ -11,7 +11,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import WorkIcon from '@mui/icons-material/Work';
+// import WorkIcon from '@mui/icons-material/Work';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@emotion/react';
 
@@ -42,7 +42,7 @@ function NavBar() {
       <Container>
         { /*principal menu*/ }
         <Toolbar disableGutters>
-          <WorkIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          {/* <WorkIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
           <Typography
             variant="h6"
             noWrap
@@ -58,7 +58,7 @@ function NavBar() {
               textDecoration: 'none',
             }}
           >
-            JOB PORTAL
+            DoNation
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -97,7 +97,7 @@ function NavBar() {
               ))}
             </Menu>
           </Box>
-          <WorkIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          {/* <WorkIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
           <Typography
             variant="h6"
             noWrap
@@ -123,6 +123,48 @@ function NavBar() {
                 sx={{ my: 2, color: 'white', display: 'block' }}>
                     <Link to = "/" style={{color: 'white', textDecoration: 'none'}}>
                         Home
+                    </Link>
+              </Button>
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, display: 'block', bgcolor: 'white', marginRight: '10px' }}>
+                    <Link to = "/" style={{color: '#2196F3', textDecoration: 'none'}}>
+                        I AM A DONATOR
+                    </Link>
+              </Button>
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, bgcolor: 'white', display: 'block' }}>
+                    <Link to = "/" style={{color: '#2196F3', textDecoration: 'none'}}>
+                        I NEED DONATIONS
+                    </Link>
+              </Button>
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}>
+                    <Link to = "/" style={{color: 'white', textDecoration: 'none'}}>
+                        JOBS
+                    </Link>
+              </Button>
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}>
+                    <Link to = "/" style={{color: 'white', textDecoration: 'none'}}>
+                        COURCES
+                    </Link>
+              </Button>
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}>
+                    <Link to = "/" style={{color: 'white', textDecoration: 'none'}}>
+                        ABOUT US
+                    </Link>
+              </Button>
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}>
+                    <Link to = "/" style={{color: 'white', textDecoration: 'none'}}>
+                        CONTACT US
                     </Link>
               </Button>
             
