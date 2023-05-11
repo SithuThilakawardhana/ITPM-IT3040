@@ -1,43 +1,27 @@
 {
   "donator": [
     {
-      "id": 4,
-      "name": "Kane Williamson",
-      "address": "Anuradhapura",
-      "phone": "908908767",
-      "donate": "Dryfood"
+      "name": "Rajamuni Dewayalage Chalani Resanika",
+      "address": "Sub post office , gabbalagama",
+      "phone": "+10701425035",
+      "donate": "/.\\.;",
+      "active": true,
+      "id": 10
     },
     {
       "name": "Rajamuni Dewayalage Chalani Resanika",
       "address": "Sub post office , gabbalagama",
       "phone": "+10701425035",
-      "donate": "dry food",
+      "donate": "khuiyiuyu",
       "active": true,
-      "id": 5
+      "id": 11
     },
     {
-      "name": "Chalani Reshanika",
-      "address": "Malabe",
+      "id": 12,
+      "name": "chalani",
+      "address": "kurunegala",
       "phone": "0701425035",
-      "donate": "saddasd",
-      "active": false,
-      "id": 7
-    },
-    {
-      "name": "Rajamuni Dewayalage Chalani Resanika",
-      "address": "Sub post office , gabbalagama",
-      "phone": "+10701425035",
-      "donate": "stationary",
-      "active": true,
-      "id": 8
-    },
-    {
-      "name": "Nihira techiees",
-      "address": "gfdgfdg",
-      "phone": "-10701425035",
-      "donate": "milk",
-      "active": true,
-      "id": 9
+      "donate": "money"
     }
   ]
 }

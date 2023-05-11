@@ -150,7 +150,7 @@ const Navbar = () => {
                             style={{ background: 'white',border: '1px solid #1e90ff'  }}
                             onClick={handleCloseNavMenu}
                             sx={{ my: 2, color: '#1e90ff', display: 'block' }}>
-                            <Link to="/logindonator" style={{ color: '#1e90ff', textDecoration: "none" }}>
+                            <Link to="/login" style={{ color: '#1e90ff', textDecoration: "none" }}>
                                 I am a Donator
                             </Link>
                         </Button>
@@ -162,7 +162,7 @@ const Navbar = () => {
                             }}
                             onClick={handleCloseNavMenu}
                             sx={{ my: 2, color: ' #1e90ff', display: 'block' }}>
-                            <Link to="/loginbenificiary" style={{ color: ' #1e90ff', textDecoration: "none" }}>
+                            <Link to="/login" style={{ color: ' #1e90ff', textDecoration: "none" }}>
                             I Need Donations  
                             </Link>
                         </Button>
@@ -225,17 +225,17 @@ const Navbar = () => {
                             onClose={handleCloseUserMenu}
                         >
 
-                            <MenuItem onClick={handleCloseUserMenu}>
+                            {/* <MenuItem onClick={handleCloseUserMenu}>
                                 <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.primary.main }} to="/admin/dashboard">Admin Dashboard</Link></Typography>
                             </MenuItem>
 
                             <MenuItem onClick={handleCloseUserMenu}>
                                 <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.primary.main }} to="/user/dashboard">User Dashboard</Link></Typography>
-                            </MenuItem>
+                            </MenuItem> */}
 
                         
                             <MenuItem onClick={handleCloseUserMenu}>
-                                <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.primary.main }} to="/login">Log In</Link></Typography>
+                                <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.primary.main }} to="/login">Admin Dashboard</Link></Typography>
                             </MenuItem> 
 
                             
