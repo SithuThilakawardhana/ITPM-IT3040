@@ -114,7 +114,7 @@ function NavBar() {
               textDecoration: 'none',
             }}
           >
-            JOB PORTAL
+            DoNation
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             { /*menu desktop*/  }
@@ -142,28 +142,28 @@ function NavBar() {
               <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}>
-                    <Link to = "/" style={{color: 'white', textDecoration: 'none'}}>
+                    <Link to = "/jobs" style={{color: 'white', textDecoration: 'none'}}>
                         JOBS
                     </Link>
               </Button>
               <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}>
-                    <Link to = "/" style={{color: 'white', textDecoration: 'none'}}>
+                    <Link to = "/cources" style={{color: 'white', textDecoration: 'none'}}>
                         COURCES
                     </Link>
               </Button>
               <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}>
-                    <Link to = "/" style={{color: 'white', textDecoration: 'none'}}>
+                    <Link to = "/aboutus" style={{color: 'white', textDecoration: 'none'}}>
                         ABOUT US
                     </Link>
               </Button>
               <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}>
-                    <Link to = "/" style={{color: 'white', textDecoration: 'none'}}>
+                    <Link to = "/contactus" style={{color: 'white', textDecoration: 'none'}}>
                         CONTACT US
                     </Link>
               </Button>
