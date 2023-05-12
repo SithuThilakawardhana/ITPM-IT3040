@@ -11,6 +11,8 @@ import Home from './pages/Home';
 import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
 import Cources from './pages/Courses';
+import UserDashboard from './pages/user/UserDashboard';
+import UserRoute from './component/UserRoute';
 
 const App = () => {
   return (
@@ -25,6 +27,7 @@ const App = () => {
             <Route path = '/search/:keyword' element = {<Jobs/>} />
             <Route path = '/jobs' element = {<Jobs/>} />
             <Route path = '/login' element = {<Login/>} />
+            <Route path = '/user/dashboard' element = {<UserRoute><UserDashboard/></UserRoute>} />
             <Route path = '/aboutus' element = {<AboutUs/>} />
             <Route path = '/cources' element = {<Cources/>} />
             <Route path = '/contactus' element = {<ContactUs/>} />

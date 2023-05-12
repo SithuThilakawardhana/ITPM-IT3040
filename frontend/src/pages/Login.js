@@ -22,6 +22,13 @@ const validationSchema = yup.object({
 
 const Login = () => {
 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { isAuthenticated } = useSelector(state => state.signIn);
+    useEffect(() =>{
+        navigate('/user/dashboard');
+        }, [isAuthenticated] );
+
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -29,7 +36,8 @@ const Login = () => {
         },
         validationSchema: validationSchema,
         onSubmit: (values, actions) => {
-            alert (JSON.stringify(values, null, 2));
+            // alert (JSON.stringify(values, null, 2));
+            dispatch(userSignInAction(values));
             actions.resetForm();
         }
     });

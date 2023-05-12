@@ -4,7 +4,7 @@ const { isAuthenticated } = require("../middleware/auth");
 const router = express.Router();
 
 // auth routes
-// /api/aignup
+// /api/signup
 router.post('/signup', signup);
 
 // /api/signin
