@@ -14,12 +14,14 @@ import MenuItem from '@mui/material/MenuItem';
 // import WorkIcon from '@mui/icons-material/Work';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTheme } from '@emotion/react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { userLogOutAction } from '../redux/actions/userAction';
 
 const pages = ['Home', 'Log In' ];
 
 const NavBar = () => {
+  //show / hide button
+  const { userInfo } = useSelector(state => state.signIn);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { palette } = useTheme();
@@ -211,12 +213,18 @@ const NavBar = () => {
                 <MenuItem onClick={handleCloseUserMenu}>
                   <Typography textAlign="center"><Link style ={{textDecoration: 'none', color: palette.primary.main}} to ="/admin/dashboard">Dashboard</Link></Typography>
                 </MenuItem>
-                <MenuItem onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center"><Link style ={{textDecoration: 'none', color: palette.primary.main}} to = "/login"> Log In</Link></Typography>
-                </MenuItem>
-                <MenuItem onClick={logOutUser}>
-                  <Typography style={{textDecoration: 'none', color: palette.primary.main}} textAlign="center">Log Out</Typography>
-                </MenuItem>
+                
+                {
+                  !userInfo ?
+                  
+                  <MenuItem onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center"><Link style ={{textDecoration: 'none', color: palette.primary.main}} to = "/login"> Log In</Link></Typography>
+                  </MenuItem> :
+
+                  <MenuItem onClick={logOutUser}>
+                    <Typography style={{textDecoration: 'none', color: palette.primary.main}} textAlign="center">Log Out</Typography>
+                  </MenuItem>
+                }
               
             </Menu>
           </Box>
