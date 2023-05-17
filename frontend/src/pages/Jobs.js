@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import NavBar from '../component/NavBar'
-import Header from '../component/Header'
-import { Box, Card, Container, ListItemIcon, MenuItem, MenuList, Pagination, Stack, Typography, useTheme } from '@mui/material'
-import { useDispatch, useSelector } from 'react-redux'
-import { jobLoadAction } from '../redux/actions/jobaction'
-import { Link, useParams } from 'react-router-dom'
-import CardElement from '../component/CardElement'
-import Footer from '../component/Footer'
-import LoadingBox from '../component/LoadingBox'
-import SelectComponent from '../component/SelectComponent'
-import { jobTypeLoadAction } from '../redux/actions/jobTypeAction'
+import React, { useEffect, useState } from 'react';
+import NavBar from '../component/NavBar';
+import Header from '../component/Header';
+import { Box, Card, Container, ListItemIcon, MenuItem, MenuList, Pagination, Stack, Typography, useTheme } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { jobLoadAction } from '../redux/actions/jobAction';
+import { Link, useParams } from 'react-router-dom';
+import CardElement from '../component/CardElement';
+import Footer from '../component/Footer';
+import LoadingBox from '../component/LoadingBox';
+import SelectComponent from '../component/SelectComponent';
+import { jobTypeLoadAction } from '../redux/actions/jobTypeAction';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 const Jobs = () => {
@@ -23,10 +23,12 @@ const Jobs = () => {
 
   useEffect(() => {
     dispatch(jobLoadAction(page, keyword, cat, location));
+    // eslint-disable-next-line
   },[page, keyword, cat, location])
 
   useEffect(() => {
     dispatch(jobTypeLoadAction());
+    // eslint-disable-next-line
   }, []);
 
   const handleChangeCategory = (e) => {

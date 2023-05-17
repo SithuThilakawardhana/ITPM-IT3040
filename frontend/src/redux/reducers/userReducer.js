@@ -1,7 +1,10 @@
-import { USER_SIGNIN_REQUEST, USER_SIGNIN_FAIL, USER_SIGNIN_RESET, USER_SIGNIN_SUCCESS, USER_APPLY_JOB_REQUEST, USER_APPLY_JOB_SUCCESS, USER_APPLY_JOB_FAIL, USER_APPLY_JOB_RESET } from "../constants/userConstant";
+import { USER_SIGNIN_REQUEST, USER_SIGNIN_FAIL, USER_SIGNIN_RESET, USER_SIGNIN_SUCCESS, USER_APPLY_JOB_REQUEST, USER_APPLY_JOB_SUCCESS, USER_APPLY_JOB_FAIL, USER_APPLY_JOB_RESET, ALL_USER_LOAD_REQUEST, ALL_USER_LOAD_SUCCESS, ALL_USER_LOAD_FAIL, ALL_USER_LOAD_RESET } from "../constants/userConstant";
 import { USER_LOGOUT_REQUEST, USER_LOGOUT_FAIL, USER_LOGOUT_RESET, USER_LOGOUT_SUCCESS } from "../constants/userConstant";
 import { USER_LOAD_REQUEST, USER_LOAD_SUCCESS, USER_LOAD_FAIL, USER_LOAD_RESET } from "../constants/userConstant";
+import { USER_SIGNUP_FAIL, USER_SIGNUP_REQUEST, USER_SIGNUP_RESET, USER_SIGNUP_SUCCESS } from "../constants/userConstant";
 
+
+// sign In reducer
 export const userReducerSignIn = (state = {}, action) => {
     switch (action.type) {
         case USER_SIGNIN_REQUEST:
@@ -24,6 +27,25 @@ export const userReducerSignIn = (state = {}, action) => {
                 error: action.payload
             }
         case USER_SIGNIN_RESET:
+            return {}
+        default:
+            return state;
+    }
+}
+
+// sign up reducer
+export const userReducerSignUp = (state = {}, action) => {
+    switch (action.type) {
+        case USER_SIGNUP_REQUEST:
+            return { loading: true }
+        case USER_SIGNUP_SUCCESS:
+            return {
+                loading: false,
+                userSignUp: action.payload,
+            }
+        case USER_SIGNUP_FAIL:
+            return { loading: false, error: action.payload }
+        case USER_SIGNUP_RESET:
             return {}
         default:
             return state;
@@ -89,5 +111,23 @@ export const userApplyJobReducer = (state = {}, action) => {
         default:
             return state;
     }
+}
 
+//all users reducer
+export const allUserReducer = (state = { users: [] }, action) => {
+    switch (action.type) {
+        case ALL_USER_LOAD_REQUEST:
+            return { loading: true, users: [] }
+        case ALL_USER_LOAD_SUCCESS:
+            return {
+                loading: false,
+                users: action.payload.users,
+            }
+        case ALL_USER_LOAD_FAIL:
+            return { loading: false, users: [], error: action.payload }
+        case ALL_USER_LOAD_RESET:
+            return {}
+        default:
+            return state;
+    }
 }

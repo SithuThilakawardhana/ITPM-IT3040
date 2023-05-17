@@ -36,6 +36,7 @@ const LogIn = () => {
                 navigate('/user/dashboard');
             }
         }
+        // eslint-disable-next-line
     }, [isAuthenticated])
 
     const formik = useFormik({

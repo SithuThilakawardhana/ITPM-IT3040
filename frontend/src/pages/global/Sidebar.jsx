@@ -24,6 +24,7 @@ const SidebarAdm = () => {
 
     useEffect(() => {
         dispatch(userProfileAction());
+        // eslint-disable-next-line
     }, []);
 
     //logout

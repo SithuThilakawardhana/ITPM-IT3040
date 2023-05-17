@@ -15,6 +15,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useTheme } from '@emotion/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { userLogOutAction } from '../redux/actions/userAction';
+import { toggleActionTheme } from '../redux/actions/themeAction';
+import { DarkMode, LightMode } from "@mui/icons-material";
 
 const pages = ['Home', 'Log In' ];
 
@@ -181,8 +183,23 @@ const NavBar = () => {
                         CONTACT US
                     </Link>
               </Button>
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}>
+                    <Link to="/register" style={{ color: 'white', textDecoration: "none" }}>
+                        Register
+                    </Link>
+              </Button>
             
           </Box>
+
+          <IconButton sx={{ mr: 4 }} onClick={() => dispatch(toggleActionTheme())}>
+                        {palette.mode === "dark" ? (
+                            <DarkMode sx={{ color: "#ffffff", fontSize: "25px" }} />
+                        ) : (
+                            <LightMode sx={{ color: "#ffffff", fontSize: "25px" }} />
+                        )}
+          </IconButton>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">

@@ -24,7 +24,7 @@ const SearchInputEl = () => {
         actions.resetForm();
     }
 
-    const { values, errors, touched, handleBlur, handleChange, handleSubmit, isSubmitting } = useFormik({
+    const { values, errors, touched, handleChange, handleSubmit, isSubmitting } = useFormik({
         initialValues: {
             search: '',
         },

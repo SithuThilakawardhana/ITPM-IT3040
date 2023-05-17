@@ -7,7 +7,7 @@ import Footer from '../component/Footer';
 import Navbar from '../component/NavBar'
 import Button from '@mui/material/Button';
 import { userApplyJobAction } from '../redux/actions/userAction';
-import { jobLoadSingleAction } from '../redux/actions/jobaction';
+import { jobLoadSingleAction } from '../redux/actions/jobAction';
 import LoadingBox from '../component/LoadingBox';
 
 
@@ -17,6 +17,7 @@ const SingleJob = () => {
     const { id } = useParams();
     useEffect(() => {
         dispatch(jobLoadSingleAction(id));
+        // eslint-disable-next-line
     }, [id]);
 
     const applyForAJob = () => {
@@ -52,7 +53,7 @@ const SingleJob = () => {
                                                     {singleJob && singleJob.title}
                                                 </Typography>
                                                 <Typography variant="body2">
-                                                    <Box component="span" sx={{ fontWeight: 700 }}>Salary</Box>: ${singleJob && singleJob.salary}
+                                                    <Box component="span" sx={{ fontWeight: 700 }}>Salary</Box>: LKR {singleJob && singleJob.salary}
                                                 </Typography>
                                                 <Typography variant="body2">
                                                     <Box component="span" sx={{ fontWeight: 700 }}>Category</Box>: {singleJob && singleJob.jobType ? singleJob.jobType.jobTypeName : "No category"}

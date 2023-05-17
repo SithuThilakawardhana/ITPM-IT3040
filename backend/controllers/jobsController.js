@@ -2,7 +2,7 @@ const Job = require ('../models/jobModel');
 const JobType = require ('../models/jobTypeModel');
 const ErrorResponse = require('../utils/errorResponse');
 
-// create job category
+// create job
 exports.createJob = async (req, res, next) =>{
     try {
         const job = await Job.create({
@@ -89,7 +89,7 @@ exports.showJobs = async (req, res, next) =>{
     // const count = await Job.find({}).estimatedDocumentCount();
     const count = await Job.find({...keyword, jobType: categ, location: locationFilter}).countDocuments();
     try {
-        const jobs = await Job.find({...keyword,jobType: categ , location: locationFilter}).sort({createdAt : -1}).skip(pageSize * (page - 1)).limit(pageSize)
+        const jobs = await Job.find({...keyword,jobType: categ , location: locationFilter}).sort({createdAt : -1}).populate('jobType', 'jobTypeName').populate('user', 'firstName').skip(pageSize * (page - 1)).limit(pageSize)
         res.status(201).json({
             success: true,
             jobs,
