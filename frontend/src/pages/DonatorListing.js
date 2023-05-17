@@ -17,7 +17,7 @@ const DonatorListing = () => {
     //Delete 
     const Removefunction = (id) => {
         if (window.confirm("Do you want to remove?")) {
-            fetch("http://localhost:3000/donator/" + id, {
+            fetch("http://localhost:3001/donator/" + id, {
                 method: "DELETE"
             })
                 .then((res) => {
@@ -32,7 +32,7 @@ const DonatorListing = () => {
     
 
     useEffect(() => {
-        fetch("http://localhost:3000/donator")
+        fetch("http://localhost:3001/donator")
             .then((res) => {
                 return res.json();
             })
@@ -54,6 +54,8 @@ const DonatorListing = () => {
         empdata &&
         empdata.filter((item) => {
             return (
+                item.user.toLowerCase().includes(searchQuery.toLowerCase()) &&
+                item.user.toUpperCase().includes(searchQuery.toUpperCase()) ||
                 item.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
                 item.name.toUpperCase().includes(searchQuery.toUpperCase()) ||
                 item.donate.toLowerCase().includes(searchQuery.toLowerCase()) &&
@@ -67,12 +69,12 @@ const DonatorListing = () => {
     
     //report generation
     const handleDownloadFile = () => {
-        fetch("http://localhost:3000/donator")
+        fetch("http://localhost:3001/donator")
             .then((res) => res.json())
             .then((data) => {
                 const csvData = [
-                    ["ID", "Name", "Address", "Phone", "Donation Type"],
-                    ...data.map((item) => [item.id, item.name, item.address, item.phone, item.donate])
+                    ["user", "ID", "Name", "Address", "Phone", "Donation Type"],
+                    ...data.map((item) => [item.user, item.id, item.name, item.address, item.phone, item.donate])
                 ];
                 const csvContent = "data:text/csv;charset=utf-8," + csvData.map(e => e.join(",")).join("\n");
                 const link = document.createElement("a");
@@ -93,7 +95,7 @@ const DonatorListing = () => {
         <div className="container" component="main" maxWidth="100%">
             <div className="card" component="main" maxWidth="100%" style={{ marginTop: "50px" }}>
                 <div className="card-title" style={{ marginTop: "20px", textAlign: "center" }}>
-                    <h2>Donator Listing</h2>
+                    <h2>Donator & Benificiary Listing</h2>
                 </div>
                 <div className="card-body">
                     
@@ -126,10 +128,11 @@ const DonatorListing = () => {
                             <thead className="bg-dark text-white">
                                 <tr>
                                     <td>ID</td>
+                                    <td>User type</td>
                                     <td>Name</td>
                                     <td>Address</td>
                                     <td>Phone</td>
-                                    <td>Donation Type</td>
+                                    <td>Donate / Request</td>
                                     <td>Action</td>
                                 </tr>
                             </thead>
@@ -138,6 +141,7 @@ const DonatorListing = () => {
                                     filteredData.map((item) => (
                                         <tr key={item.id}>
                                             <td>{item.id}</td>
+                                            <td>{item.user}</td>
                                             <td>{item.name}</td>
                                             <td>{item.address}</td>
                                             <td>{item.phone}</td>

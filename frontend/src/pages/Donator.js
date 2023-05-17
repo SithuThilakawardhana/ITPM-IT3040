@@ -1,186 +1,133 @@
-import { InboxOutlined, UploadOutlined } from '@ant-design/icons';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useState } from 'react';
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
-import {
-  Button,
-  Checkbox,
-  Col,
-  Form,
-  Input,
-  Radio,
-  Select,
-  Space,
-} from 'antd';
+import React, { Component, useState } from "react";
+
+export default function SignUp() {
+  const [name, setname] = useState("");
+  const [address, setaddress] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setphone] = useState("");
+  const [food, setfood] = useState("");
+  const [stationary, setstationary] = useState("");
+  const [money, setmoney] = useState("");
+  const [donateType, setdonateType] = useState("");
 
 
-const { Option } = Select;
-const formItemLayout = {
-  labelCol: {
-    span: 6,
-  },
-  wrapperCol: {
-    span: 10,
-  },
-};
-const onFinish = (values) => {
-  console.log('Received values of form: ', values);
-};
-
-const theme = createTheme();
-const Donator = () => {
-  const [showPaymentForm, setShowPaymentForm] = useState(false);
-
-  const handleRequestorChange = (e) => {
-    if (e.target.value === 'c') {
-      setShowPaymentForm(true);
-    } else {
-      setShowPaymentForm(false);
+  const handleSubmit = (e) => {
+    
+      console.log( name,address, email,phone,food,stationary,money, donateType);
+      fetch("http://localhost:3001/donator", {
+        method: "POST",
+        crossDomain: true,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify({
+        
+          name,
+          address,
+          email,
+          phone,food,stationary,money,
+          donateType,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data, "donation");
+          if (data.status == "ok") {
+            alert("Donation Successful");
+          } else {
+            alert("Something went wrong");
+          }
+        });
     }
-
-  };
+  
 
   return (
-    <div style={{
-      backgroundImage: "url('poverty.jpg')",
-      backgroundSize: 'cover',
-      opacity: 0.8, // set opacity here
-      minHeight: '100vh', // to cover the full screen
-    }}>
-      <Form
-        name="validate_other"
-        {...formItemLayout}
-        onFinish={onFinish}
-        initialValues={{
-          'input-number': 3,
-          'checkbox-group': ['A', 'B'],
-          rate: 3.5,
-        }}
-        style={{
-          maxWidth: 2000,
-        }}
-      >
+    <div className="auth-wrapper">
+      <div className="auth-inner">
+        <form onSubmit={handleSubmit}>
+          <h3>Like to Donate</h3>
+          
+          <div className="mb-3">
+            <label>Name</label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Full Name"
+              value={name}
+              onChange={(e) => setname(e.target.value)}
+            />
+          </div>
 
-<Navbar />
+          <div className="mb-3">
+            <label>Address</label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Address"
+              value={address}
+              onChange={(e) => setaddress(e.target.value)}
+            />
+          </div>
 
-<Form
-      {...formItemLayout}
-      style={{
-        maxWidth: 2000,
-        backgroundColor: 'transparent', // make the form background transparent
-      }}
-    >
-    </Form>
+          <div className="mb-3">
+            <label>Email address</label>
+            <input
+              type="email"
+              className="form-control"
+              placeholder="Enter email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
 
-<ThemeProvider theme={theme}></ThemeProvider>
-      <Container component="main" maxWidth="70%" height="80"  marginTop= '200px'></Container>
-      <span style={{fontWeight: 'bold', display: 'flex' , justifyContent:' center', fontSize: '30px'}}>Can I be a Support?</span>
-     <br/>
-   
-     <Form.Item
-            name="Name"
-            label="Name"
-            value="name"
-            hasFeedback
-            rules={[    {      required: true,      message: 'Please enter your name',    },  ]}
-          >
-            <Input />
-      </Form.Item>
+          <div className="mb-3">
+            <label>Phone number</label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Enter phone number"
+              value={phone}
+              onChange={(e) => setphone(e.target.value)}
+            />
+          </div>
 
-      <Form.Item
-            name="phone"
-            label="Phone Number"
-            value="phone"
-            hasFeedback
-            rules={[    {      required: true,      message: 'Please enter your Phone Number',    },  ]}
-          >
-            <Input />
-      </Form.Item>
+          <div>
+            Like to donate
+            <input
+              type="checkbox"
+              value={stationary}
+              onChange={(e) => setstationary(e.target.value)}
+            />
+            Stationary
+            <input
+              type="checkbox"
+              value={food}
+              onChange={(e) => setfood(e.target.value)}
+            />
+            Dryfood
+            <input
+              type="checkbox"
+              value={money}
+              onChange={(e) => setmoney(e.target.value)}
+            />
+            Money
+          </div>
 
-      <Form.Item
-            name="Address"
-            label="Address"
-            value="address"
-            hasFeedback
-            rules={[    {      required: true,      message: 'Please enter your Address',    },  ]}
-          >
-            <Input />
-      </Form.Item>
 
-    <Form.Item name="Donate" value="donate" label="Donate">
-      <Checkbox.Group>
-        
-          <Col span={20}>
-            <Checkbox
-              value="dryfood"
-              style={{
-                lineHeight: '32px',
-              }}
-            >
-              Dry food
-            </Checkbox>
-          </Col>
-          <Col span={20}>
-            <Checkbox
-              value="stationary"
-              style={{
-                lineHeight: '32px',
-              }}
-            >
-              Stationary
-            </Checkbox>
-          </Col>
-          <Col span={20}>
-            <Checkbox
-              value="money"
-              style={{
-                lineHeight: '32px',
-              }}
-            >
-              Money
-            </Checkbox>
-          </Col>
-        
-      </Checkbox.Group>
-    </Form.Item>
 
-   
- <Form.Item name="Donating mode" label="Donating mode">
-      <Radio.Group>
-        <Radio value="a">Deliver to the Benificiary</Radio>
-        <Radio value="b">Pick from Donator</Radio>
-        <Radio value="c">Bank Deposit</Radio>
-      </Radio.Group>
-      
-      {showPaymentForm && (
-            <Form.Item name="payment" label="Payment">
-              <Input type="number" placeholder="Enter payment amount" />
-            </Form.Item>
-          )}
-    </Form.Item>
-    
-    <Form.Item
-      wrapperCol={{
-        span: 12,
-        offset: 6,
-      }}
-    >
-      <Space>
-        <Button href='/' type="primary" htmlType="submit">
-          Submit
-        </Button>
-        <Button htmlType="reset">reset</Button>
-      </Space>
-    </Form.Item>
-    <br></br>
-    <br></br> <br></br> <br></br>
-    <Footer />
-  </Form>
-   
-  </div>
-
-);
-    }
-export default Donator;
+          <div className="d-grid">
+          <a href="/dashboard"> 
+            <button type="submit" className="btn btn-primary">
+            submit Donation
+            </button></a>
+          </div>
+          <p className="forgot-password text-right">
+        <a href="/dashboard">Back</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  );
+}

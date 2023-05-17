@@ -73,7 +73,6 @@ export default function Album() {
                   <CardMedia
                     component="img"
                     sx={{
-                    
                       pt: '56.25%',
                     }}
                     image="https://source.unsplash.com/random"
@@ -97,7 +96,6 @@ export default function Album() {
           </Grid>
         </Container>
       </main>
-      
     </ThemeProvider>
      <Footer />
      </>

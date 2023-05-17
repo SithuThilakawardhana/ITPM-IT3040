@@ -25,7 +25,7 @@ const validationSchema = yup.object({
 
 
 
-const LogInBenificiary = () => {
+const LogInDonator = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { isAuthenticated, userInfo } = useSelector(state => state.signIn);
@@ -57,7 +57,7 @@ const LogInBenificiary = () => {
     return (
         <>
             <Navbar />
-            <Box sx={{ height: '81vh', display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <Box sx={{ height: '79vh', display: "flex", alignItems: "center", justifyContent: "center" }}>
 
 
                 <Box onSubmit={formik.handleSubmit} component="form" className='form_style border-style' >
@@ -105,7 +105,7 @@ const LogInBenificiary = () => {
 
                         <Button  style={{ background: 'white' ,marginTop: '10px', border: '1px solid navy blue'  }}
                             fullWidth variant="contained" type='submit' >
-                            <Link to='/signup' style={{ color: ' #1e90ff', textDecoration: "none" }}>
+                            <Link to='/signupd' style={{ color: ' #1e90ff', textDecoration: "none" }}>
                                 Sign Up
                             </Link>    
                         </Button>
@@ -126,4 +126,4 @@ const LogInBenificiary = () => {
     )
 }
 
-export default LogInBenificiary
+export default LogInDonator

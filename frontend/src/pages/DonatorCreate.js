@@ -41,12 +41,27 @@ const DonatorCreate = () => {
                     <form className="container" onSubmit={handlesubmit}>
 
                         <div className="card" style={{"textAlign":"left"}}>
-                        <div className="card-title"style={{ marginTop: '20px',textAlign: "center" }}>
-                         <h2>Donator Create</h2>
-                </div>
+                            <div className="card-title"style={{ marginTop: '20px',textAlign: "center" }}>
+                                <h2>Donator Create</h2>
+                            </div>
                             <div className="card-body">
 
                                 <div className="column">
+
+                                <div className="col-lg-12">
+                                        <div className="form-check">
+                                        <label>User Type</label>
+                                        <div className="form-check">
+                                        <input checked={active} onChange={e=>activechange(e.target.checked)} type="radio" className="form-check-input"></input>
+                                            <label  className="form-check-label">Donator</label>
+                                            
+                                        </div>
+                                        <div className="form-check">
+                                        <input checked={active} onChange={e=>activechange(e.target.checked)} type="radio" className="form-check-input"></input>
+                                            <label  className="form-check-label">Benificiary</label>
+                                            
+                                        </div>
+                                    </div>
 
                                     <div className="col-lg-12">
                                         <div className="form-group">
@@ -102,6 +117,7 @@ const DonatorCreate = () => {
 
                             </div>
 
+                        </div>
                         </div>
 
                     </form>

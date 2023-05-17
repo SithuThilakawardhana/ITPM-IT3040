@@ -31,7 +31,7 @@ import EditBenificiary from './components/EditBenificiary';
 import EditDonator from './components/EditDonator';
 import CreateBen from './components/CreateBen';
 import CreateDon from './components/CreateDon';
-import {HashRouter,useNavigate,Navigate} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 import DonatorListing from './pages/DonatorListing';
 import DonatorCreate from './pages/DonatorCreate';
 import DonatorDetails from './pages/DonatorDetails';
@@ -40,7 +40,8 @@ import BenListing from './pages/BenListing';
 import BenCreate from './pages/BenCreate';
 import BenDetails from './pages/BenDetails';
 import BenEdit from './pages/BenEdit';
-
+import UserDetails from "./pages/userDetail";
+// import ImageUpload from "./components/imageUpload.";
 
 
 
@@ -54,6 +55,7 @@ const DashdonateHOC = Layout(Dashdonate);
 
 
 function App () {
+    const isLoggedIn = window.localStorage.getItem("loggedIn");
     const user = localStorage.getItem("token");
     return (
         <>
@@ -68,7 +70,14 @@ function App () {
                             <Route path="/signup" exact element={<SignUp />} />
                             <Route path="/login" exact element={<LogIn />} />
                             <Route path="/" element={<Navigate replace to="/login" />} />
-                            
+                            <Route
+                                exact
+                                path="/"
+                                // eslint-disable-next-line eqeqeq
+                                element={isLoggedIn == "true" ? <UserDetails /> : <LogIn />}
+                            />
+                            <Route path="/userDetails" element={<UserDetails />} />
+
                             <Route path='/donatorlisting' element={<DonatorListing />}></Route>
                             <Route path='/donator/create' element={<DonatorCreate />}></Route>
                             <Route path='/donator/detail/:empid' element={<DonatorDetails />}></Route>
@@ -82,9 +91,7 @@ function App () {
 
                             <Route path='/search/location/:location' element={<Home />} />
                             <Route path='/search/:keyword' element={<Home />} />
-                            {/* <Route path='/login' element={<LogIn />} /> */}
                             <Route path='/logindonator' element={<LogInDonator />} />
-                            {/* <Route path='/signup' element={<SignUp />} /> */}
                             <Route path='/signupd' element={<SignUpD />} />
                             <Route path='/aboutus' element={<AboutUs />} />
                             <Route path='/loginbenificiary' element={<LogInBenificiary />} />
@@ -114,19 +121,3 @@ function App () {
 
 export default App;
 
-
-
-// function App(){
-
-//     const nevigate=useNavigate()
-//     let startroute=(url)=>{
-//       nevigate(url)
-//     }
-//   return(
-//   <div>
-//   <div className="main-container">
-//     <button className='button-to-route' onClick={()=>startroute("/table")}>Table I/O delet/Update</button>
-//   </div>
-//   </div>
-//   );
-//   }
