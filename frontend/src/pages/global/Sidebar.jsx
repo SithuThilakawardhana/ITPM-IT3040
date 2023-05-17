@@ -1,30 +1,37 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Sidebar, Menu, MenuItem, menuClasses, useProSidebar } from 'react-pro-sidebar';
 import { Box, useTheme } from "@mui/material";
 import WorkIcon from '@mui/icons-material/Work';
 import CategoryIcon from '@mui/icons-material/Category';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
+import Person3Icon from '@mui/icons-material/Person3';
 import Avatar from '@mui/material/Avatar';
 import { Link } from 'react-router-dom'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { userLogOutAction } from "../../redux/actions/userAction";
+import { userLogOutAction, userProfileAction } from "../../redux/actions/userAction";
 import logoDashboard from '../../images/1087815.png';
 import LoginIcon from '@mui/icons-material/Login'
 
 const SidebarAdm = () => {
+    const { userInfo } = useSelector(state=>state.signIn);
     const { palette } = useTheme();
     const { collapsed } = useProSidebar();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        dispatch(userProfileAction());
+    }, []);
 
     //logout
     const logOut = () => {
         dispatch(userLogOutAction());
         window.location.reload(true);
         setTimeout(()=>{
-            navigate('/login');
+            navigate('/');
         },500)
     }
 
@@ -64,10 +71,21 @@ const SidebarAdm = () => {
                                 },
                             },
                         }}>
-                            <MenuItem component={<Link to='/admin/dashboard' />} icon={<DashboardIcon/>}> Dashboard </MenuItem>
-                            <MenuItem component={<Link to='/admin/users' />} icon={<GroupAddIcon/>}> Users </MenuItem>
-                            <MenuItem component={<Link to='/admin/jobs' />} icon={<WorkIcon/>}> Jobs </MenuItem>
-                            <MenuItem component={<Link to='/admin/category' />} icon={<CategoryIcon/>}> Category </MenuItem>
+                            {
+                                userInfo && userInfo.role === 1 ?
+                                <>
+                                    <MenuItem component={<Link to='/admin/dashboard' />} icon={<DashboardIcon/>}> Dashboard </MenuItem>
+                                    <MenuItem component={<Link to='/admin/users' />} icon={<GroupAddIcon/>}> Users </MenuItem>
+                                    <MenuItem component={<Link to='/admin/jobs' />} icon={<WorkIcon/>}> Jobs </MenuItem>
+                                    <MenuItem component={<Link to='/admin/category' />} icon={<CategoryIcon/>}> Category </MenuItem>
+                                </> :
+                                <>
+                                    <MenuItem component={<Link to='/user/dashboard' />} icon={<DashboardIcon/>}> Dashboard </MenuItem>
+                                    <MenuItem component={<Link to='/user/jobs' />} icon={<WorkHistoryIcon/>}> Applied Jobs </MenuItem>
+                                    <MenuItem component={<Link to='/user/userInfo' />} icon={<Person3Icon/>}> Personal Info </MenuItem>
+                                </>
+                            }
+                            
                     </Menu>
                 </Box>
 

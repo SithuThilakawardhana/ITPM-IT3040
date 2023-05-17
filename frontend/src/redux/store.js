@@ -1,16 +1,19 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from '@redux-devtools/extension';
-import { loadJobReducer } from './reducers/jobReducer';
+import { loadJobReducer, loadJobSingleReducer } from './reducers/jobReducer';
 import { loadJobTypeReducer } from './reducers/jobTypeReducer';
-import { userReducerLogOut, userReducerSignIn } from './reducers/userReducer';
+import { userApplyJobReducer, userReducerLogOut, userReducerProfile, userReducerSignIn } from './reducers/userReducer';
 
 // combine reducers 
 const reducer = combineReducers({
     loadJobs: loadJobReducer,
     jobTypeAll: loadJobTypeReducer,
     signIn: userReducerSignIn,
-    logOut: userReducerLogOut
+    logOut: userReducerLogOut,
+    userProfile: userReducerProfile,
+    singleJob: loadJobSingleReducer,
+    userJobApplication: userApplyJobReducer
 });
 
 // initial state

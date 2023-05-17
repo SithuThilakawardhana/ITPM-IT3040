@@ -11,7 +11,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-// import WorkIcon from '@mui/icons-material/Work';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTheme } from '@emotion/react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -57,9 +56,7 @@ const NavBar = () => {
   return (
     <AppBar position="static">
       <Container>
-        { /*principal menu*/ }
         <Toolbar disableGutters>
-          {/* <WorkIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
           <Typography
             variant="h6"
             noWrap
@@ -144,15 +141,15 @@ const NavBar = () => {
               </Button>
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, display: 'block', bgcolor: 'white', marginRight: '10px' }}>
-                    <Link to = "/" style={{color: '#2196F3', textDecoration: 'none'}}>
+                sx={{ my: 2, color:'white', marginRight: '10px' , display: 'block'}}>
+                    <Link to = "/" style={{color: 'white', textDecoration: 'none'}}>
                         I AM A DONATOR
                     </Link>
               </Button>
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, bgcolor: 'white', display: 'block' }}>
-                    <Link to = "/" style={{color: '#2196F3', textDecoration: 'none'}}>
+                sx={{ my: 2, color: 'white', display: 'block' }}>
+                    <Link to = "/" style={{color: 'white', textDecoration: 'none'}}>
                         I NEED DONATIONS
                     </Link>
               </Button>
@@ -211,7 +208,10 @@ const NavBar = () => {
             >
               
                 <MenuItem onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center"><Link style ={{textDecoration: 'none', color: palette.primary.main}} to ="/admin/dashboard">Dashboard</Link></Typography>
+                  <Typography textAlign="center"><Link style ={{textDecoration: 'none', color: palette.primary.main}} to ="/admin/dashboard">Admin Dashboard</Link></Typography>
+                </MenuItem>
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center"><Link style ={{textDecoration: 'none', color: palette.primary.main}} to ="/user/dashboard">User Dashboard</Link></Typography>
                 </MenuItem>
                 
                 {
