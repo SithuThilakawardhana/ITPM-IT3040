@@ -31,7 +31,7 @@ import EditBenificiary from './components/EditBenificiary';
 import EditDonator from './components/EditDonator';
 import CreateBen from './components/CreateBen';
 import CreateDon from './components/CreateDon';
-import {HashRouter,useNavigate,Navigate} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 import DonatorListing from './pages/DonatorListing';
 import DonatorCreate from './pages/DonatorCreate';
 import DonatorDetails from './pages/DonatorDetails';
@@ -73,6 +73,7 @@ function App () {
                             <Route
                                 exact
                                 path="/"
+                                // eslint-disable-next-line eqeqeq
                                 element={isLoggedIn == "true" ? <UserDetails /> : <LogIn />}
                             />
                             <Route path="/userDetails" element={<UserDetails />} />
@@ -90,9 +91,7 @@ function App () {
 
                             <Route path='/search/location/:location' element={<Home />} />
                             <Route path='/search/:keyword' element={<Home />} />
-                            {/* <Route path='/login' element={<LogIn />} /> */}
                             <Route path='/logindonator' element={<LogInDonator />} />
-                            {/* <Route path='/signup' element={<SignUp />} /> */}
                             <Route path='/signupd' element={<SignUpD />} />
                             <Route path='/aboutus' element={<AboutUs />} />
                             <Route path='/loginbenificiary' element={<LogInBenificiary />} />

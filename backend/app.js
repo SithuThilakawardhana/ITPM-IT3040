@@ -22,6 +22,7 @@ const mongoUrl =
 mongoose
   .connect(mongoUrl, {
     useNewUrlParser: true,
+    useUnifiedTopology: true
   })
   .then(() => {
     console.log("Connected to database");
@@ -31,6 +32,7 @@ mongoose
 
 // ----------------------------get data
 require("./userDetails");
+require("./donation");
 // require("./imageDetails");
 
 
@@ -85,6 +87,34 @@ app.post("/login", async (req, res) => {
 });
 
 
+//--------------------------------------------------donator function
+const donator = mongoose.model("DonationInfo");
+app.post("/donator", async (req, res) => {
+  const { name, address, email, phone,food,stationary,money, userType } = req.body;
+
+  try {
+    const oldUser = await User.findOne({ email });
+
+    await User.create({
+    
+      name,
+      address,
+      email,
+      phone,
+      food,
+      stationary,
+      money,
+      donateType,
+    });
+    res.send({ status: "ok" });
+  } catch (error) {
+    res.send({ status: "error" });
+  }
+});
+
+
+
+
 //--------------page after succesfull login
 app.post("/userData", async (req, res) => {
   const { token } = req.body;
@@ -111,7 +141,7 @@ app.post("/userData", async (req, res) => {
   } catch (error) { }
 });
 
-app.listen(3000, () => {
+app.listen(3001, () => {
   console.log("Server Started");
 });
 
@@ -204,6 +234,8 @@ app.post("/reset-password/:id/:token", async (req, res) => {
   }
 });
 
+
+// -----------------------------------------------------get all users to dashboard
 app.get("/getAllUser", async (req, res) => {
   try {
     const allUser = await User.find({});
@@ -213,6 +245,8 @@ app.get("/getAllUser", async (req, res) => {
   }
 });
 
+
+// -----------------------------------------------delete user in dashboard
 app.post("/deleteUser", async (req, res) => {
   const { userid } = req.body;
   try {
@@ -225,6 +259,8 @@ app.post("/deleteUser", async (req, res) => {
   }
 });
 
+
+// --------------------------
 
 app.post("/upload-image", async (req, res) => {
   const { base64 } = req.body;

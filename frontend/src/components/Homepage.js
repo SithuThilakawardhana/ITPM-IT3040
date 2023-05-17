@@ -1,11 +1,88 @@
-import React from 'react'
+import React from 'react';
+import Nav from './Nav';
+import './style.css';
+import  { useEffect, useState } from "react";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import ReactPaginate from 'react-paginate';
+import { useRef } from "react";
 
-import Nav from './Nav'
+function Homepage({ Toggle }) {   
+    
+    //setting state
+  const [data, setData] = useState([]);
+  const [limit,setLimit]=useState(5);
+  const [pageCount,setPageCount]=useState(1);
+  const currentPage=useRef();
 
-import './style.css'
 
 
-function Homepage({ Toggle }) {    
+  useEffect(() => {
+    currentPage.current=1;
+    // getAllUser();
+    getPaginatedUsers();
+  }, );
+
+
+  //fetching all user
+  const getAllUser = () => {
+    fetch("http://localhost:3001/getAllUser", {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data, "userData");
+        setData(data.data);
+      });
+  };
+
+
+  //deleting user
+  const deleteUser = (id, name) => {
+    if (window.confirm(`Are you sure you want to delete ${name}`)) {
+      fetch("http://localhost:3001/deleteUser", {
+        method: "POST",
+        crossDomain: true,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify({
+          userid: id,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          alert(data.data);
+          getAllUser();
+        });
+    } else {
+    }
+  };
+
+  //pagination
+  function changeLimit(){
+    currentPage.current=1;
+    getPaginatedUsers();
+  }
+
+  function getPaginatedUsers(){
+    fetch(`http://localhost:3001/paginatedUsers?page=${currentPage.current}&limit=${limit}`, {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data, "userData");
+        setPageCount(data.pageCount);
+        setData(data.result)
+        
+       
+      });
+
+  }
+
+
     return (        
     
         <div className='px-3'>            
@@ -50,7 +127,59 @@ function Homepage({ Toggle }) {
                         </div>               
                     </div>           
                 </div>
+{/* ------------------------------------- */}
 
+                <div className="auth-wrapper" style={{ height: "auto" }}>
+                    <div className="auth-inner" style={{ width: "auto" }}>
+                        
+                        <table style={{ width: 500 }}>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>User Type</th>
+                            <th>Delete</th>
+                        </tr>
+                        {data && data.map((i) => {
+                            return (
+                            <tr>
+                                <td>{i.fname}</td>
+                                <td>{i.email}</td>
+                                <td>{i.userType}</td>
+                                <td>
+                                <FontAwesomeIcon
+                                    icon={faTrash}
+                                    onClick={() => deleteUser(i._id, i.fname)}
+                                />
+                                </td>
+                            </tr>
+                            );
+                        })}
+                        </table>
+                        {/* <ReactPaginate
+                        breakLabel="..."
+                        nextLabel="next >"
+                        onPageChange={handlePageClick}
+                        pageRangeDisplayed={5}
+                        pageCount={pageCount}
+                        previousLabel="< previous"
+                        renderOnZeroPageCount={null}
+                        marginPagesDisplayed={2}
+                        containerClassName="pagination justify-content-center"
+                        pageClassName="page-item"
+                        pageLinkClassName="page-link"
+                        previousClassName="page-item"
+                        previousLinkClassName="page-link"
+                        nextClassName="page-item"
+                        nextLinkClassName="page-link"
+                        activeClassName="active"
+                        forcePage={currentPage.current-1}
+                        /> */}
+                        <input placeholder="Limit" onChange={e=>setLimit(e.target.value)}/>
+                        <button onClick={changeLimit}>Set Limit</button>
+                        
+                    </div>
+                    </div>
+{/* ----------------------------------------- */}
                 <div>
                     <table class="table caption-top bg-white rounded mt-2">                
                     <caption className='text-white fs-4'>Recent Donations</caption>                
@@ -103,6 +232,7 @@ function Homepage({ Toggle }) {
                         </tbody>           
                     </table>        
                 </div> 
+                {/* ------------------------------ */}
                 </div>   
                 
             )

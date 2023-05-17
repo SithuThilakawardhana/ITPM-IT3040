@@ -4,6 +4,11 @@ import 'bootstrap/js/dist/dropdown'
 
 import 'bootstrap/js/dist/collapse'
 
+//logout
+const logOut = () => {
+    window.localStorage.clear();
+    window.location.href = "./login";
+  };
 
 function Nav({Toggle}) {  
     return (        
@@ -20,7 +25,7 @@ function Nav({Toggle}) {
                         <div className="dropdown-menu" aria-labelledby="dropdownId">                            
                     <a className="dropdown-item" href="#">Profile</a>                            
                     <a className="dropdown-item" href="#">Setting</a>                            
-                    <a className="dropdown-item" href="/">Logout</a>                        
+                    <a onClick={logOut} className="dropdown-item" >Logout</a>                        
         </div>                    
         </li>                
         </ul>            

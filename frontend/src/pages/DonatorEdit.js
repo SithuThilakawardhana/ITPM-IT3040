@@ -57,7 +57,7 @@ const DonatorEdit = () => {
 
                     <div className="card" style={{"textAlign":"left"}}>
                     <div className="card-title"style={{ marginTop: '20px',textAlign: "center" }}>
-                         <h2>Edit Donator Details</h2>
+                         <h2>Edit  Details</h2>
                 </div>
                         <div className="card-body">
 

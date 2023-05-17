@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 
 export default function SignUp() {
   const [fname, setFname] = useState("");
@@ -11,14 +11,14 @@ export default function SignUp() {
 
 
   const handleSubmit = (e) => {
-    if (userType == "Admin" && secretKey != "it20646974") {
+    if (userType === "Admin" && secretKey != "it20646974") {
       e.preventDefault();
       alert("Invalid Admin");
     } else {
       e.preventDefault();
 
-      console.log(fname, lname, email, password);
-      fetch("http://localhost:3000/signup", {
+      console.log(secretKey, fname, lname, email, password);
+      fetch("http://localhost:3001/signup", {
         method: "POST",
         crossDomain: true,
         headers: {
@@ -41,7 +41,7 @@ export default function SignUp() {
           if (data.status == "ok") {
             alert("Registration Successful");
           } else {
-            alert("Something went wrong-user exist");
+            alert("Something went wrong");
           }
         });
     }
@@ -69,13 +69,15 @@ export default function SignUp() {
             />
             Admin
           </div>
-          {userType == "Admin" ? (
+        
+          {userType === "Admin" ? (
             <div className="mb-3">
               <label>Secret Key</label>
               <input
                 type="text"
                 className="form-control"
                 placeholder="Secret Key"
+                value={secretKey}
                 onChange={(e) => setSecretKey(e.target.value)}
               />
             </div>
@@ -87,6 +89,7 @@ export default function SignUp() {
               type="text"
               className="form-control"
               placeholder="First name"
+              value={fname}
               onChange={(e) => setFname(e.target.value)}
             />
           </div>
@@ -97,6 +100,7 @@ export default function SignUp() {
               type="text"
               className="form-control"
               placeholder="Last name"
+              value={lname}
               onChange={(e) => setLname(e.target.value)}
             />
           </div>
@@ -107,6 +111,7 @@ export default function SignUp() {
               type="email"
               className="form-control"
               placeholder="Enter email"
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
@@ -117,6 +122,7 @@ export default function SignUp() {
               type="password"
               className="form-control"
               placeholder="Enter password"
+              value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>

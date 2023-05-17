@@ -46,13 +46,17 @@ const Navbar = () => {
     };
 
     // log out user
-    const logOutUser = () => {
-        dispatch(userLogoutAction());
-        window.location.reload(true);
-        setTimeout(() => {
-            navigate('/');
-        }, 500)
-    }
+    const logOut = () => {
+        window.localStorage.clear();
+        window.location.href = "./login";
+      };
+    // const logOutUser = () => {
+    //     dispatch(userLogoutAction());
+    //     window.location.reload(true);
+    //     setTimeout(() => {
+    //         navigate('/login');
+    //     }, 500)
+    // }
 
 
 
@@ -239,7 +243,7 @@ const Navbar = () => {
                             </MenuItem> 
 
                             
-                            <MenuItem onClick={logOutUser}>
+                            <MenuItem onClick={logOut}>
                                 <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.primary.main }} to="/Main">Log Out</Link></Typography>
                             </MenuItem>
                             
