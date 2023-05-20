@@ -4,7 +4,7 @@ import './style.css';
 import  { useEffect, useState } from "react";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import ReactPaginate from 'react-paginate';
+import ReactPaginate from 'react-paginate';
 import { useRef } from "react";
 
 function Homepage({ Toggle }) {   
@@ -66,6 +66,11 @@ function Homepage({ Toggle }) {
     currentPage.current=1;
     getPaginatedUsers();
   }
+
+  const handlePageClick = (selectedPage) => {
+  
+  };
+  
 
   function getPaginatedUsers(){
     fetch(`http://localhost:3001/paginatedUsers?page=${currentPage.current}&limit=${limit}`, {
@@ -155,7 +160,8 @@ function Homepage({ Toggle }) {
                             );
                         })}
                         </table>
-                        {/* <ReactPaginate
+                        <br></br>
+                        <ReactPaginate
                         breakLabel="..."
                         nextLabel="next >"
                         onPageChange={handlePageClick}
@@ -173,10 +179,11 @@ function Homepage({ Toggle }) {
                         nextLinkClassName="page-link"
                         activeClassName="active"
                         forcePage={currentPage.current-1}
-                        /> */}
+                        />
+                        <center>
                         <input placeholder="Limit" onChange={e=>setLimit(e.target.value)}/>
                         <button onClick={changeLimit}>Set Limit</button>
-                        
+                        </center>
                     </div>
                     </div>
 {/* ----------------------------------------- */}
