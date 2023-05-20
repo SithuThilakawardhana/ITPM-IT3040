@@ -114,9 +114,6 @@ export default function SignUp() {
             />
             Money
           </div>
-
-
-
           <div className="d-grid">
           <a href="/dashboard"> 
             <button type="submit" className="btn btn-primary">
